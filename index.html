@@ -1,464 +1,140 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Command Centre — Paul / PPC</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Command Centre — paul-pc · PPC</title>
 <style>
-:root{
-  --bg:#0f1115; --panel:#161a22; --panel2:#1c2230; --line:#283044;
-  --ink:#e8ecf3; --muted:#9aa4b8; --accent:#7aa2ff; --warn:#ffb86b;
-  --good:#8be09a; --bad:#ff7a7a; --code:#101522; --pill:#243047;
-  --shadow: 0 1px 0 #0b0d12, 0 12px 30px rgba(0,0,0,.35);
-}
-*{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif}
-a{color:var(--accent);text-decoration:none}
-a:hover{text-decoration:underline}
-header{
-  position:sticky;top:0;z-index:5;background:linear-gradient(180deg,#0f1115 70%,rgba(15,17,21,.7));
-  padding:18px 24px 12px;border-bottom:1px solid var(--line);
-}
-h1{margin:0 0 4px;font-size:18px;letter-spacing:.3px}
-.sub{color:var(--muted);font-size:12px}
-.toolbar{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;align-items:center}
-.search{
-  flex:1;min-width:240px;background:var(--panel);border:1px solid var(--line);
-  color:var(--ink);border-radius:8px;padding:8px 12px;font:inherit;
-}
-.search:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
-.chips{display:flex;gap:6px;flex-wrap:wrap}
-.chip{
-  background:var(--pill);border:1px solid var(--line);color:var(--ink);
-  padding:5px 10px;border-radius:999px;font-size:12px;cursor:pointer;
-}
-.chip:hover{border-color:var(--accent)}
-.chip.active{background:var(--accent);color:#0b0d12;border-color:var(--accent)}
-main{padding:18px 24px 60px;max-width:1200px;margin:0 auto}
-section{margin:18px 0;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
-section > header.s{
-  background:var(--panel2);padding:12px 16px;border-bottom:1px solid var(--line);
-  display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none;position:static;
-}
-section > header.s h2{margin:0;font-size:14px;letter-spacing:.4px;text-transform:uppercase;color:var(--ink)}
-section > header.s .meta{color:var(--muted);font-size:12px}
-section.collapsed .body{display:none}
-.body{padding:14px 16px}
-.row{display:grid;grid-template-columns:200px 1fr auto;gap:12px;align-items:start;padding:8px 0;border-bottom:1px dashed var(--line)}
-.row:last-child{border-bottom:0}
-.row .lbl{color:var(--muted);font-size:12px;letter-spacing:.3px;text-transform:uppercase}
-.row .val{font-size:13px;color:var(--ink)}
-.row .val small{color:var(--muted)}
-.path{font-family:Consolas,Menlo,monospace;font-size:12px;background:var(--code);padding:4px 8px;border-radius:6px;border:1px solid var(--line);display:inline-block;color:#cfe1ff;word-break:break-all}
-.pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;background:var(--pill);color:var(--ink);border:1px solid var(--line);margin-left:6px}
-.pill.good{background:rgba(139,224,154,.12);color:var(--good);border-color:rgba(139,224,154,.3)}
-.pill.warn{background:rgba(255,184,107,.12);color:var(--warn);border-color:rgba(255,184,107,.3)}
-.pill.bad{background:rgba(255,122,122,.12);color:var(--bad);border-color:rgba(255,122,122,.3)}
-.pill.muted{background:transparent;color:var(--muted)}
-.code{
-  position:relative;background:var(--code);border:1px solid var(--line);
-  border-radius:8px;padding:10px 12px;margin:6px 0;font-family:Consolas,Menlo,monospace;
-  font-size:12.5px;color:#d9e3ff;white-space:pre;overflow-x:auto;
-}
-.code .copy{
-  position:absolute;top:6px;right:6px;background:var(--panel2);border:1px solid var(--line);
-  color:var(--ink);font-size:11px;padding:3px 8px;border-radius:6px;cursor:pointer;
-}
-.code .copy:hover{border-color:var(--accent);color:var(--accent)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
-.card{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
-.card h3{margin:0 0 6px;font-size:13px;color:var(--ink)}
-.card .sub{font-size:12px;color:var(--muted)}
-.card ul{margin:8px 0 0;padding-left:18px;color:var(--ink);font-size:13px}
-.card ul li{margin:2px 0}
-.kv{display:grid;grid-template-columns:120px 1fr;gap:4px 12px;font-size:12.5px}
-.kv .k{color:var(--muted)}
-.tag{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-right:8px}
-.note{background:rgba(122,162,255,.08);border:1px solid rgba(122,162,255,.25);border-radius:8px;padding:10px 12px;color:#cfe1ff;font-size:13px}
-.note.warn{background:rgba(255,184,107,.08);border-color:rgba(255,184,107,.3);color:#ffd7a8}
-footer{padding:24px;text-align:center;color:var(--muted);font-size:12px}
-.toc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
-.toc a{background:var(--pill);padding:4px 10px;border-radius:999px;border:1px solid var(--line);font-size:12px;color:var(--ink)}
-.toc a:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
-.hidden{display:none !important}
-.last{color:var(--muted);font-size:11px;margin-left:8px}
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+body { margin: 0; padding: 18px; font-family: -apple-system, "Segoe UI", system-ui, sans-serif; color: #1f2937; background: #f7f8fa; font-size: 14px; line-height: 1.5; }
+h1 { font-size: 22px; margin: 0 0 4px; }
+h2 { font-size: 16px; margin: 22px 0 8px; color: #111827; }
+h3 { font-size: 12px; margin: 14px 0 6px; text-transform: uppercase; letter-spacing: 0.06em; color: #6b7280; }
+.sub { color: #6b7280; font-size: 12px; margin-bottom: 14px; }
+.card { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 760px) { .row { grid-template-columns: 1fr; } }
+table.proj { width: 100%; border-collapse: collapse; font-size: 13px; }
+table.proj th, table.proj td { padding: 7px 8px; border-bottom: 1px solid #eef0f3; text-align: left; vertical-align: top; }
+table.proj th { font-weight: 600; color: #374151; background: #f9fafb; font-size: 12px; }
+.pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.ok { background:#d1fae5; color:#065f46; }
+.warn { background:#fef3c7; color:#92400e; }
+.bad { background:#fee2e2; color:#991b1b; }
+.p0 { background:#fee2e2; color:#991b1b; }
+.p1 { background:#fef3c7; color:#92400e; }
+.p2 { background:#dbeafe; color:#1e40af; }
+.muted { color:#6b7280; }
+ul.compact { margin: 4px 0 0; padding-left: 18px; }
+ul.compact li { margin: 2px 0; }
+.kvp { display:grid; grid-template-columns: 220px 1fr; gap: 6px 14px; font-size: 13px; }
+.kvp dt { color:#6b7280; }
+.kvp dd { margin:0; }
+.tag { font-family: ui-monospace, monospace; font-size: 11px; background:#f3f4f6; padding:1px 6px; border-radius:4px; }
+.banner-crit { background:#fee2e2; color:#991b1b; padding:10px 14px; border-radius:8px; font-size:13px; margin-bottom:14px; border-left: 4px solid #dc2626; font-weight: 600; }
+a { color: #2563eb; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.code { font-family: ui-monospace, monospace; background:#0f172a; color:#e2e8f0; padding:8px 12px; border-radius:6px; font-size:12px; overflow-x:auto; }
 </style>
 </head>
 <body>
 
-<header>
-  <h1>Command Centre <span class="last" id="updated"></span></h1>
-  <div class="sub">One page. Every script, decision, and project state. Press <kbd>/</kbd> to search.</div>
-  <div class="toolbar">
-    <input id="search" class="search" type="search" placeholder="Search scripts, paths, projects, decisions… (try: bridge, install, JSM, Lynsey, FastForward)">
-    <div class="chips" id="chips">
-      <button class="chip active" data-filter="all">All</button>
-      <button class="chip" data-filter="scripts">Scripts</button>
-      <button class="chip" data-filter="projects">Projects</button>
-      <button class="chip" data-filter="runbook">Runbook</button>
-      <button class="chip" data-filter="decisions">Decisions</button>
-      <button class="chip" data-filter="ref">Reference</button>
-    </div>
+<h1>Command Centre</h1>
+<div class="sub">Single durable surface across PPC + Paul + .151 + Claude Code. Source of truth. Refresh: 4h anchors when state changes. Last refresh: 2026-05-15 19:49Z.</div>
+
+<div class="banner-crit">
+  P0 — FF live URL outage (Surge 504). GH Pages migration in flight. Hard ETA 22:00Z.
+</div>
+
+<div class="card">
+  <h2>The five entities</h2>
+  <dl class="kvp">
+    <dt><strong>PPC</strong></dt><dd>paul-pc — this controller, on Paul's main machine. ML2 Consulting → JSM. <strong>Sole Controller</strong>.</dd>
+    <dt><strong>151</strong></dt><dd>ff-151 — on 192.168.0.151. FastForward build owner. Foreground identity: lynsey@jsmglasgow.co.uk.</dd>
+    <dt><strong>Claude Code</strong></dt><dd>RTK PowerShell executor + Gonzo8285/MobileGame heartbeat process.</dd>
+    <dt><strong>Three pulses</strong></dt><dd>pulse-build (hourly) / pulse-gamedev (4h) / pulse-housekeep (Mon/Wed/Fri 18:00 UK).</dd>
+    <dt><strong>Bridge</strong></dt><dd>G:\My Drive\ClaudeBridge\ — shared tree PPC + 151 + Claude Code.</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h2>Active live URLs</h2>
+  <table class="proj">
+    <thead><tr><th>Surface</th><th>URL</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td><strong>FastForward — Surge (was live)</strong></td><td><a href="https://fastforward-v1-2-0-demo.surge.sh/">fastforward-v1-2-0-demo.surge.sh</a></td><td><span class="pill bad">504 OUTAGE</span></td></tr>
+      <tr><td><strong>FastForward — GH Pages (target canonical)</strong></td><td><a href="https://fastforwardtransportapp-dev.github.io/fastforward-transport-app/">…fastforward-transport-app</a></td><td><span class="pill warn">stale 14 May</span></td></tr>
+      <tr><td>PPC Dashboard</td><td><a href="https://gonzo8285.github.io/ppc-dashboard/">gonzo8285.github.io/ppc-dashboard</a></td><td><span class="pill ok">live 19:45Z</span></td></tr>
+      <tr><td>ClaudeBridge Dashboard</td><td><a href="https://gonzo8285.github.io/claudebridge-dashboard/">gonzo8285.github.io/claudebridge-dashboard</a></td><td><span class="pill ok">live 19:48Z</span></td></tr>
+      <tr><td>Command Centre (this)</td><td><a href="https://gonzo8285.github.io/command-centre/">gonzo8285.github.io/command-centre</a></td><td><span class="pill ok">live 19:49Z</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="row">
+  <div class="card">
+    <h2>Standing rules</h2>
+    <ul class="compact">
+      <li><strong>Controller = Paul.</strong> Lynsey = JSM director / user voice. Precedence Paul → memory → Lynsey PENDING → .151 judgement.</li>
+      <li><strong>Cadence ≤4h.</strong> Anchors 00/04/08/12/16/20 UK. Memory commit each cycle.</li>
+      <li><strong>ACK protocol:</strong> tick-box file in comms/from-151/ within 10 min of any directive, BEFORE substantive work.</li>
+      <li><strong>Git discipline gate:</strong> Conventional Commits, per-feature branches, PRs to main/dev.</li>
+      <li><strong>Truth-source:</strong> live URL. Git pushes don't count.</li>
+      <li><strong>One URL truth.</strong> GH Pages canonical. AWS deferred to launch.</li>
+      <li><strong>Static header above dynamic field.</strong></li>
+      <li><strong>No code for Paul.</strong> Author + test code here; hand Paul reviewable diffs + decisions.</li>
+    </ul>
   </div>
-  <div class="toc">
-    <a href="#latest">Latest</a>
-    <a href="#scripts">Scripts</a>
-    <a href="#runbook">Runbook</a>
-    <a href="#projects">Projects</a>
-    <a href="#bridge">Bridge v2</a>
-    <a href="#decisions">Decisions</a>
-    <a href="#paths">Reference paths</a>
+  <div class="card">
+    <h2>Decisions log (today)</h2>
+    <ul class="compact">
+      <li><strong>FF design approved as baseline</strong> (12:25Z) — pre-jsm-polish supersedes feature-backlog priority.</li>
+      <li><strong>Archive protocol = pick D</strong> (12:25Z) — sidecar scheme reinstated; <span class="tag">.md.processed</span> in same folder.</li>
+      <li><strong>Surge → GH Pages migration</strong> (19:10Z, accelerated 19:36Z by outage) — one URL truth.</li>
+      <li><strong>2-hourly autonomous cycle approved</strong> (19:10Z) — <span class="tag">ff-151-feature-cycle</span> picks next §5 item every 2h.</li>
+      <li><strong>approvals/ folder polling</strong> (19:10Z) — poll-seat extended to scan Lynsey-facing PENDING files.</li>
+      <li><strong>AWS deferred to launch</strong> (19:10Z) — build APIs + connectors on free hobby tier meanwhile.</li>
+      <li><strong>PENDING_unblock-the-stack edit</strong> (19:10Z) — clarification block at top, not 5th question.</li>
+      <li><strong>Controller = Paul only</strong> (19:10Z) — hard rule, Lynsey not Controller.</li>
+      <li><strong>ACK protocol established</strong> (19:35Z) — 10-min tick-box rule.</li>
+      <li><strong>Controller owns dashboards</strong> (19:50Z) — PAT path A; gonzo8285 PAT now in <span class="tag">G:\My Drive\GitHubPAT-gonzo8285.txt</span>.</li>
+    </ul>
   </div>
-</header>
+</div>
 
-<main>
+<div class="card">
+  <h2>Scripts + tools registered</h2>
+  <table class="proj">
+    <thead><tr><th>Surface</th><th>Path / endpoint</th><th>Owner</th></tr></thead>
+    <tbody>
+      <tr><td>monday.com FF board</td><td><a href="https://ml2-portfolio.monday.com/boards/5096344272">board 5096344272 (workspace 6401134)</a></td><td>Controller (GraphQL via token in G:\)</td></tr>
+      <tr><td>monday.com all 10 boards</td><td>ML2 Portfolio workspace</td><td>Controller</td></tr>
+      <tr><td>GitHub PAT — gonzo8285</td><td><span class="tag">G:\My Drive\GitHubPAT-gonzo8285.txt</span></td><td>Paul created, Controller uses</td></tr>
+      <tr><td>monday API token</td><td><span class="tag">G:\My Drive\MondayAPI.txt</span></td><td>Controller</td></tr>
+      <tr><td>RTK Entra app (PnP/Graph)</td><td>ClientId <span class="tag">a0d97edf-1a92-495c-827c-64b9cfe44527</span></td><td>Claude Code (RTK executor)</td></tr>
+      <tr><td>ClaudeBridge tree</td><td><span class="tag">G:\My Drive\ClaudeBridge\</span></td><td>PPC + 151 shared</td></tr>
+    </tbody>
+  </table>
+</div>
 
-<section id="latest" data-cat="scripts">
-  <header class="s"><h2>Latest — where it all is right now</h2><span class="meta">read this first</span></header>
-  <div class="body">
-    <div class="note">
-      <strong>The PowerShell wasn't lost.</strong> Both bridge installer scripts are sitting on your Drive — see paths below. From now on, every script I send you also gets registered here so you don't have to scroll a chat to find it.
-    </div>
-    <div style="height:10px"></div>
-    <div class="row">
-      <div class="lbl">install-bridge.ps1</div>
-      <div class="val">
-        One-touch installer for ClaudeBridge v2 daemon. Installs Tailscale + Node via winget, enables Funnel, generates token, registers Scheduled Task, starts daemon, self-tests <code>/health</code>.
-        <div><span class="path">G:\My Drive\ClaudeBridge\projects\bridge-v2\setup\install-bridge.ps1</span></div>
-      </div>
-      <div><span class="pill warn">awaiting run</span></div>
-    </div>
-    <div class="row">
-      <div class="lbl">uninstall-bridge.ps1</div>
-      <div class="val">
-        Reverses the install: stops daemon, removes Scheduled Task, optionally disables Funnel.
-        <div><span class="path">G:\My Drive\ClaudeBridge\projects\bridge-v2\setup\uninstall-bridge.ps1</span></div>
-      </div>
-      <div><span class="pill muted">on demand</span></div>
-    </div>
-    <div class="row">
-      <div class="lbl">bridge-daemon.js</div>
-      <div class="val">
-        Node daemon (~370 LOC, zero deps). Endpoints: <code>/health /resources /tools /msg /delegate /inbox</code>.
-        <div><span class="path">G:\My Drive\ClaudeBridge\projects\bridge-v2\daemon\bridge-daemon.js</span></div>
-      </div>
-      <div><span class="pill muted">runtime</span></div>
-    </div>
-  </div>
-</section>
+<div class="card">
+  <h2>Open blockers</h2>
+  <ul class="compact">
+    <li><span class="pill bad">P0</span> Surge 504 since 19:30Z. Lynsey can't demo. GH Pages migration in flight on .151.</li>
+    <li><span class="pill bad">P0</span> GitHub main 24h stale; 8 today's versions not pushed. Folded into GH Pages migration path.</li>
+    <li><span class="pill bad">P0</span> .151 missed ACK deadline 19:46Z on P0 outage directive. Three open ACKs across 19:10Z, 19:35Z, 19:36Z, 19:55Z.</li>
+    <li><span class="pill warn">P1</span> O365 Azure App Redirect URI still points at dead Netlify URL; needs Lynsey admin.</li>
+    <li><span class="pill warn">P1</span> Dashboard list-page header overlap bug — fix queued.</li>
+    <li><span class="pill p2">P2</span> esbuild build pipeline deferred to v1.9.0.</li>
+    <li><span class="pill p2">P2</span> Seed data <span class="tag">?demo=1</span> watermarked mode not wired.</li>
+  </ul>
+</div>
 
-<section id="runbook" data-cat="runbook">
-  <header class="s"><h2>Runbook — quick commands</h2><span class="meta">copy &amp; paste</span></header>
-  <div class="body">
+<div class="card" style="background:#f9fafb;">
+  <h3>How to add to this surface</h3>
+  <p class="sub">Pushed by Controller via PAT direct to <a href="https://github.com/gonzo8285/command-centre">gonzo8285/command-centre</a> on every 4h anchor with state change. The dashboard is the source of truth; chats are ephemeral. If Controller hands Paul a script and it isn't registered above, Controller has failed at the rule.</p>
+</div>
 
-    <div class="tag">A — Bring the bridge online (PPC, this machine)</div>
-    <div class="code"><button class="copy">copy</button>powershell -ExecutionPolicy Bypass -File "G:\My Drive\ClaudeBridge\projects\bridge-v2\setup\install-bridge.ps1" -HostId paul-pc</div>
-
-    <div class="tag">B — Bring the bridge online (ff-151, customer box)</div>
-    <div class="code"><button class="copy">copy</button>powershell -ExecutionPolicy Bypass -File "G:\My Drive\ClaudeBridge\projects\bridge-v2\setup\install-bridge.ps1" -HostId ff-151</div>
-
-    <div class="tag">C — Health check (after install)</div>
-    <div class="code"><button class="copy">copy</button>Invoke-RestMethod http://localhost:7878/health</div>
-
-    <div class="tag">D — If 151's VM won't start (diagnose)</div>
-    <div class="code"><button class="copy">copy</button># From a host that can reach 192.168.0.151 on the LAN
-Test-NetConnection 192.168.0.151 -Port 3389
-Test-NetConnection 192.168.0.151 -Port 22
-ping -n 4 192.168.0.151</div>
-
-    <div class="tag">E — Tear down the bridge if anything looks wrong</div>
-    <div class="code"><button class="copy">copy</button>powershell -ExecutionPolicy Bypass -File "G:\My Drive\ClaudeBridge\projects\bridge-v2\setup\uninstall-bridge.ps1"</div>
-
-    <div class="tag">F — Open this Command Centre next time (PowerShell)</div>
-    <div class="code"><button class="copy">copy</button>ii "G:\My Drive\ClaudeBridge\CommandCentre\index.html"</div>
-
-    <div class="tag">F2 — …or from cmd.exe</div>
-    <div class="code"><button class="copy">copy</button>start "" "G:\My Drive\ClaudeBridge\CommandCentre\index.html"</div>
-  </div>
-</section>
-
-<section id="projects" data-cat="projects">
-  <header class="s"><h2>Active projects — status</h2><span class="meta">9 workstreams</span></header>
-  <div class="body">
-    <div class="grid">
-
-      <div class="card">
-        <h3>FastForward <span class="pill warn">phase-gated</span></h3>
-        <div class="sub">Customer: JSM Glasgow (Lynsey + Jonny). Owned by ML2 Consulting.</div>
-        <div class="kv" style="margin-top:8px">
-          <div class="k">Stack</div><div>Netlify SPA, single <code>index.html</code></div>
-          <div class="k">Edits</div><div>via Netlify API (ff-151)</div>
-          <div class="k">Priority</div><div>GUI polish → Git repo → resume dev</div>
-          <div class="k">Phase</div><div>modernise → mobile → app (strict order)</div>
-        </div>
-        <ul>
-          <li><a href="../projects/fastforward/SPEC.md">SPEC</a></li>
-          <li><a href="../projects/fastforward/UI-BRIEF.md">UI brief</a></li>
-          <li><a href="../projects/fastforward/GIT-MIGRATION.md">Git migration plan</a></li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>ClaudeBridge v2 <span class="pill warn">awaiting installer run</span></h3>
-        <div class="sub">HTTPS network bridge between PPC and ff-151 over Tailscale Funnel.</div>
-        <div class="kv" style="margin-top:8px">
-          <div class="k">Transport</div><div>Tailscale Funnel</div>
-          <div class="k">Auth</div><div>Bearer token (shared via Drive)</div>
-          <div class="k">Fallback</div><div>v1 file bridge if heartbeat &gt; 5 min</div>
-          <div class="k">Next step</div><div>Paul runs install on PPC, then 151</div>
-        </div>
-        <ul>
-          <li><a href="../projects/bridge-v2/design.md">design.md</a></li>
-          <li><a href="../projects/bridge-v2/PROTOCOL-v2.md">protocol</a></li>
-          <li><a href="../projects/bridge-v2/README.md">readme</a></li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Gallowfell <span class="pill good">running</span></h3>
-        <div class="sub">Mobile game. Claude Code owns git commits via 4-hour heartbeat. PPC coordinates only — don't touch the repo.</div>
-        <ul>
-          <li><a href="../projects/gaming-app/HANDOVER.md">handover</a></li>
-          <li><a href="../projects/gaming-app/gdd_v0.md">GDD v0</a></li>
-          <li><a href="../projects/gaming-app/backlog.md">backlog</a></li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>R.T. Keedwell SharePoint <span class="pill muted">PPC build, no deadline</span></h3>
-        <div class="sub">Design parity with FastForward. Slow burn.</div>
-      </div>
-
-      <div class="card">
-        <h3>Dropship <span class="pill muted">chip-away</span></h3>
-        <div class="sub">Paul's personal project. Details TBD.</div>
-      </div>
-
-      <div class="card">
-        <h3>ML2 Consulting <span class="pill muted">chip-away</span></h3>
-        <div class="sub">Paul's consulting brand. Details TBD.</div>
-      </div>
-
-      <div class="card">
-        <h3>FF connector pack <span class="pill warn">P2</span></h3>
-        <div class="sub">9 connector targets + Open API. Design docs allowed in parallel; build gated.</div>
-      </div>
-
-      <div class="card">
-        <h3>PPC live dashboard <span class="pill good">live</span></h3>
-        <div class="sub">Fed every 15 min via state.json.</div>
-        <ul>
-          <li><a href="https://gonzo8285.github.io/ppc-dashboard/" target="_blank">open dashboard ↗</a></li>
-          <li><a href="../shared/dashboard/state.json">state.json</a></li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Cloud status pack <span class="pill good">live</span></h3>
-        <div class="sub">Curated status, GitHub Pages.</div>
-        <ul>
-          <li><a href="https://gonzo8285.github.io/claudebridge-dashboard/" target="_blank">open ↗</a></li>
-        </ul>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<section id="bridge" data-cat="scripts">
-  <header class="s"><h2>Bridge v2 — what it does, in plain English</h2><span class="meta">design summary</span></header>
-  <div class="body">
-    <div class="grid">
-      <div class="card">
-        <h3>The problem it solves</h3>
-        <ul>
-          <li>v1 bridge is async file drops via Drive — fine for messages, useless for live handoff.</li>
-          <li>PPC's sandbox can't reach the LAN, only the public internet — so the link must be HTTPS-routable.</li>
-          <li>You wanted "accessible from anywhere" and shared compute between us.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>How it works</h3>
-        <ul>
-          <li><strong>Transport:</strong> Tailscale + Funnel gives each host a <code>https://&lt;host&gt;.&lt;tailnet&gt;.ts.net</code> URL.</li>
-          <li><strong>Daemon:</strong> Node, ~370 LOC, zero npm deps. Runs as Scheduled Task at logon — no admin needed.</li>
-          <li><strong>Auth:</strong> Bearer token in <code>shared/.bridge-token</code>. Rotate by overwriting the file.</li>
-          <li><strong>Fallback:</strong> If heartbeat &gt; 5 min, callers automatically drop back to v1 file bridge.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Endpoints</h3>
-        <ul>
-          <li><code>/health</code> — unauth, returns 200 when alive.</li>
-          <li><code>/resources</code> — auth, host capacity snapshot.</li>
-          <li><code>/tools</code> — auth, what this host can do right now.</li>
-          <li><code>/msg</code> — auth, accepts v1 + v2 message shapes.</li>
-          <li><code>/delegate</code> — auth, queues a job; bounces if overloaded.</li>
-          <li><code>/inbox</code> — auth, drains queue.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Phase plan</h3>
-        <ul>
-          <li><strong>A</strong> — Bridge online on both hosts (waiting on you).</li>
-          <li><strong>B</strong> — PPC drains 151's queue: scheduled tasks first, then FastForward builds, then the rest.</li>
-          <li><strong>C</strong> — Resume rest of portfolio per the phase-gate.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="decisions" data-cat="decisions">
-  <header class="s"><h2>Decisions log</h2><span class="meta">newest first</span></header>
-  <div class="body">
-
-    <div class="row">
-      <div class="lbl">2026-05-12</div>
-      <div class="val">
-        <strong>Command Centre created.</strong> Single durable page for scripts, runbooks, decisions, and project state. Lives at <span class="path">G:\My Drive\ClaudeBridge\CommandCentre\index.html</span>. Desktop shortcut placed for one-click access.<br>
-        <small>Trigger: Paul lost a PowerShell snippet to chat scrollback. From now on every script PPC sends is registered here.</small>
-      </div>
-      <div><span class="pill good">closed</span></div>
-    </div>
-
-    <div class="row">
-      <div class="lbl">2026-05-12</div>
-      <div class="val">
-        <strong>Bridge v2 built and seeded.</strong> Daemon, installer, protocol, design all on Drive. Seed message to 151 already in <code>comms/from-paul-pc/</code> on thread <code>bridge-v2</code>.<br>
-        <small>Awaiting Paul to run <code>install-bridge.ps1</code> on PPC, then 151. 151 replies with its Funnel URL.</small>
-      </div>
-      <div><span class="pill warn">open</span></div>
-    </div>
-
-    <div class="row">
-      <div class="lbl">2026-05-12</div>
-      <div class="val">
-        <strong>PPC promoted to core controller.</strong> PPC owns all tasks, processes, scheduled jobs, projects. Act-then-report.
-      </div>
-      <div><span class="pill good">closed</span></div>
-    </div>
-
-    <div class="row">
-      <div class="lbl">2026-05-12</div>
-      <div class="val">
-        <strong>Memory cloud mirror enabled.</strong> Free Drive mirror at <code>G:\My Drive\ClaudeBridge\memory\</code> as cross-instance read surface. One-way PPC → Drive.
-      </div>
-      <div><span class="pill good">closed</span></div>
-    </div>
-
-  </div>
-</section>
-
-<section id="paths" data-cat="ref">
-  <header class="s"><h2>Reference paths</h2><span class="meta">where to find everything</span></header>
-  <div class="body">
-    <div class="row">
-      <div class="lbl">Command Centre</div>
-      <div class="val"><span class="path">G:\My Drive\ClaudeBridge\CommandCentre\</span></div>
-      <div></div>
-    </div>
-    <div class="row">
-      <div class="lbl">Comms inbox (from 151)</div>
-      <div class="val"><span class="path">G:\My Drive\ClaudeBridge\comms\from-151\</span></div>
-      <div></div>
-    </div>
-    <div class="row">
-      <div class="lbl">Comms outbox (to 151)</div>
-      <div class="val"><span class="path">G:\My Drive\ClaudeBridge\comms\from-paul-pc\</span></div>
-      <div></div>
-    </div>
-    <div class="row">
-      <div class="lbl">Comms protocol</div>
-      <div class="val"><span class="path">G:\My Drive\ClaudeBridge\comms\PROTOCOL.md</span></div>
-      <div></div>
-    </div>
-    <div class="row">
-      <div class="lbl">Bridge v2 project</div>
-      <div class="val"><span class="path">G:\My Drive\ClaudeBridge\projects\bridge-v2\</span></div>
-      <div></div>
-    </div>
-    <div class="row">
-      <div class="lbl">FastForward project</div>
-      <div class="val"><span class="path">G:\My Drive\ClaudeBridge\projects\fastforward\</span></div>
-      <div></div>
-    </div>
-    <div class="row">
-      <div class="lbl">Gallowfell project</div>
-      <div class="val"><span class="path">G:\My Drive\ClaudeBridge\projects\gaming-app\</span></div>
-      <div></div>
-    </div>
-    <div class="row">
-      <div class="lbl">Memory mirror</div>
-      <div class="val"><span class="path">G:\My Drive\ClaudeBridge\memory\</span></div>
-      <div></div>
-    </div>
-    <div class="row">
-      <div class="lbl">PPC live dashboard</div>
-      <div class="val"><a href="https://gonzo8285.github.io/ppc-dashboard/" target="_blank">https://gonzo8285.github.io/ppc-dashboard/</a></div>
-      <div></div>
-    </div>
-    <div class="row">
-      <div class="lbl">Cloud status pack</div>
-      <div class="val"><a href="https://gonzo8285.github.io/claudebridge-dashboard/" target="_blank">https://gonzo8285.github.io/claudebridge-dashboard/</a></div>
-      <div></div>
-    </div>
-  </div>
-</section>
-
-</main>
-
-<footer>
-  Command Centre is a flat HTML file. Nothing fancy — just durable.<br>
-  Maintained by PPC. To add a script or decision, append a row in the appropriate section.
-</footer>
-
-<script>
-// Updated timestamp
-document.getElementById('updated').textContent = '— updated ' + new Date().toISOString().slice(0,16).replace('T',' ') + 'Z';
-
-// Collapse on header click
-document.querySelectorAll('section > header.s').forEach(h=>{
-  h.addEventListener('click',()=>h.parentElement.classList.toggle('collapsed'));
-});
-
-// Copy buttons
-document.querySelectorAll('.code .copy').forEach(btn=>{
-  btn.addEventListener('click',e=>{
-    e.stopPropagation();
-    const block = btn.parentElement;
-    const text = block.innerText.replace(/^copy\n?/,'').trim();
-    navigator.clipboard.writeText(text).then(()=>{
-      const old = btn.textContent;
-      btn.textContent = 'copied';
-      setTimeout(()=>btn.textContent = old, 1200);
-    });
-  });
-});
-
-// Search
-const search = document.getElementById('search');
-const sections = document.querySelectorAll('section');
-function applyFilter(){
-  const q = search.value.trim().toLowerCase();
-  const cat = document.querySelector('.chip.active').dataset.filter;
-  sections.forEach(sec=>{
-    const inCat = (cat === 'all' || sec.dataset.cat === cat);
-    const text = sec.innerText.toLowerCase();
-    const match = (q === '' || text.includes(q));
-    sec.classList.toggle('hidden', !(inCat && match));
-  });
-}
-search.addEventListener('input', applyFilter);
-
-// Chips
-document.querySelectorAll('.chip').forEach(c=>{
-  c.addEventListener('click',()=>{
-    document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
-    c.classList.add('active');
-    applyFilter();
-  });
-});
-
-// Slash to focus search
-document.addEve
+</body>
+</html>
