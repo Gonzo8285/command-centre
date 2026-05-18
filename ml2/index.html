@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ML2 Consulting — Senior IT + AI delivery team</title>
+<title>ML² Consulting — Senior IT + AI delivery team</title>
 <meta name="description" content="ML2 Consulting is Paul McCann (25 years senior IT) plus three AI agents operating as a single delivery team. We design, build, ship and run software for SMBs at enterprise pace.">
-<meta property="og:title" content="ML2 Consulting — Senior IT + AI delivery team">
+<meta property="og:title" content="ML² Consulting — Senior IT + AI delivery team">
 <meta property="og:description" content="We ship in a day, not a quarter. Senior IT judgement, AI-multiplied delivery.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%232563EB'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='system-ui,-apple-system' font-size='22' font-weight='800' fill='white'%3EML2%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232563EB'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Inter,system-ui,sans-serif' font-size='26' font-weight='900' fill='white' letter-spacing='-1.5'%3EML%3C/text%3E%3Ctext x='52' y='26' font-family='Inter,system-ui,sans-serif' font-size='14' font-weight='800' fill='white'%3E2%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://rsms.me/">
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 <style>
@@ -69,15 +69,21 @@ header.site .inner {
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
 }
 .brand {
-  display: flex; align-items: center; gap: 10px;
+  display: flex; align-items: center; gap: 12px;
   font-weight: 700; color: var(--ink); text-decoration: none;
 }
-.brand .mark {
-  width: 32px; height: 32px; border-radius: 8px; background: var(--brand);
-  color: white; display: grid; place-items: center;
-  font-weight: 800; font-size: 14px; letter-spacing: -0.02em;
+.brand .mark { display: block; }
+.brand .mark svg { display: block; width: 36px; height: 36px; border-radius: 9px; }
+.brand .name {
+  font-size: 17px; font-weight: 700;
+  display: flex; align-items: baseline; gap: 6px;
 }
-.brand .name { font-size: 16px; }
+.brand .name .ml { letter-spacing: -0.02em; }
+.brand .name .squared { font-size: 11px; font-weight: 800; position: relative; top: -7px; color: var(--brand); }
+.brand .name .consulting { font-weight: 500; color: var(--muted); margin-left: -2px; }
+@media (max-width: 480px) {
+  .brand .name .consulting { display: none; }
+}
 nav.primary { display: flex; gap: 4px; }
 nav.primary a {
   color: var(--ink-2); padding: 6px 12px; border-radius: 8px;
@@ -210,18 +216,27 @@ table.team td .role { color: var(--muted); font-size: 12.5px; margin-top: 2px; }
 }
 .contact-card h2 { color: white; }
 .contact-card p { color: rgba(255,255,255,0.92); }
+.contact-card .channels { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px; }
 .contact-card a.email {
-  display: inline-block; margin-top: 8px; padding: 12px 20px;
+  display: inline-block; padding: 12px 20px;
   background: white; color: var(--brand); border-radius: 10px;
   font-weight: 700; font-size: 16px;
 }
 .contact-card a.email:hover { background: var(--brand-soft); text-decoration: none; }
-.contact-card .secondary {
-  display: inline-block; margin-top: 8px; margin-left: 8px; padding: 12px 20px;
-  background: rgba(255,255,255,0.15); color: white; border-radius: 10px;
-  font-weight: 600; font-size: 15px;
+.contact-card a.phone {
+  display: inline-block; padding: 12px 20px;
+  background: rgba(255,255,255,0.18); color: white; border-radius: 10px;
+  font-weight: 700; font-size: 16px;
+  border: 1px solid rgba(255,255,255,0.3);
 }
-.contact-card .secondary:hover { background: rgba(255,255,255,0.25); text-decoration: none; }
+.contact-card a.phone:hover { background: rgba(255,255,255,0.28); text-decoration: none; }
+.contact-card .secondary {
+  display: inline-block; padding: 12px 20px;
+  background: transparent; color: white; border-radius: 10px;
+  font-weight: 600; font-size: 15px;
+  text-decoration: underline;
+}
+.contact-card .secondary:hover { background: rgba(255,255,255,0.1); text-decoration: none; }
 
 /* Footer */
 footer.site {
@@ -266,8 +281,17 @@ footer.site a:hover { color: var(--brand); }
 <header class="site">
   <div class="inner">
     <a href="#" class="brand">
-      <span class="mark">M2</span>
-      <span class="name">ML2 Consulting</span>
+      <span class="mark" aria-label="ML2 Consulting logo">
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+          <rect width="64" height="64" rx="14" fill="#2563EB"/>
+          <text x="32" y="44" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="26" font-weight="900" fill="white" letter-spacing="-1.5">ML</text>
+          <text x="52" y="26" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="800" fill="white">2</text>
+        </svg>
+      </span>
+      <span class="name">
+        <span class="ml">ML</span><span class="squared">2</span>
+        <span class="consulting">Consulting</span>
+      </span>
     </a>
     <nav class="primary">
       <a href="#services">Services</a>
@@ -285,9 +309,9 @@ footer.site a:hover { color: var(--brand); }
     <span class="eyebrow">SENIOR IT — AI-MULTIPLIED DELIVERY</span>
     <h1>We ship in a day, not a quarter.</h1>
     <p class="lead">
-      ML2 Consulting is Paul McCann — 25 years of senior IT — plus three AI agents operating as a single delivery team.
+      ML² Consulting is Paul McCann — 25 years of senior IT — plus three AI agents operating as a single delivery team.
       We design, build, ship and run software for SMBs at enterprise pace.
-      The same team that wrote this page shipped eight versions of a transport platform to a live URL this week, cleaned up over a terabyte of misfiled SharePoint data, and ran a multi-machine agent protocol across two laptops to do it.
+      The same team that wrote this page shipped nine versions of a transport platform to a live URL this week, cleaned up over a terabyte of misfiled SharePoint data, and ran a multi-machine agent protocol across two laptops to do it.
     </p>
     <div class="cta-row">
       <a href="#cases" class="cta">See the work</a>
@@ -296,14 +320,14 @@ footer.site a:hover { color: var(--brand); }
 
     <div class="stats">
       <div class="stat"><div class="n">25y</div><div class="l">Senior IT experience</div></div>
-      <div class="stat"><div class="n">9</div><div class="l">Active workstreams</div></div>
-      <div class="stat"><div class="n">1.16 TB</div><div class="l">SharePoint reclaimed (this week)</div></div>
+      <div class="stat"><div class="n">4</div><div class="l">Seats in the team stack</div></div>
+      <div class="stat"><div class="n">1.16 TB</div><div class="l">SharePoint reclaimed this week</div></div>
       <div class="stat"><div class="n">v1.9</div><div class="l">Live versions of FastForward shipped</div></div>
     </div>
   </section>
 
   <section class="s" id="manifesto">
-    <h2><span class="num">01 · Manifesto</span>What ML2 actually is</h2>
+    <h2><span class="num">01 · Manifesto</span>What ML² actually is</h2>
     <p class="intro">
       Most consultancies sell hours. We sell shipped software with live URLs and reproducible operations.
       Most "AI consultancies" sell decks. We run a working multi-agent delivery team in production and use it to ship customer work.
@@ -313,7 +337,7 @@ footer.site a:hover { color: var(--brand); }
       <p class="q">
         "We're not a deck-and-roadmap shop. We're a senior IT lead and three AI agents shipping production software, end-to-end, into customer environments. The AI is not a feature in a product — it's how the work gets done."
       </p>
-      <div class="who">— Paul McCann, ML2 Consulting</div>
+      <div class="who">— Paul McCann, ML² Consulting</div>
     </div>
   </section>
 
@@ -370,7 +394,7 @@ footer.site a:hover { color: var(--brand); }
         </div>
       </div>
       <p>
-        JSM Glasgow ran their freight-forwarding operation on Excel. We're building them a proper TMS — and productising it as an ML2 product line in parallel. Eight versions shipped in seven days, all SHA-verified against the live URL.
+        JSM Glasgow ran their freight-forwarding operation on Excel. We're building them a proper TMS — and productising it as an ML² product line in parallel. Nine versions shipped in seven days, all SHA-verified against the live URL.
       </p>
       <ul>
         <li>Customer + Subcontractor profiles with Document Store, Job History, Contacts, Previous Invoices</li>
@@ -425,26 +449,6 @@ footer.site a:hover { color: var(--brand); }
         Internal infrastructure · Available as a reference architecture for clients running multi-team AI deployments
       </div>
     </div>
-
-    <div class="case">
-      <div class="head">
-        <div>
-          <h3>The Curse of Gallowfell — Mobile card game <span class="pill warn">in development</span></h3>
-          <div class="meta">Mobile · CCG · 5 factions · SDXL art pipeline · Godot engine</div>
-        </div>
-      </div>
-      <p>
-        Internal product line. A grimdark collectible card game with five locked factions, 200+ card specs written, full art-direction lock and SDXL pipeline scaffold. Demonstrates the same operating model applied to a product, not a customer.
-      </p>
-      <ul>
-        <li>5 factions designed: Iron Penitents · Ash-Mourners · Coven of the Black Mire · The Last Legion · Skinward Pact</li>
-        <li>SDXL prompt pipeline with per-faction LoRA stacking and deterministic seed strategy</li>
-        <li>216 per-card art specs authored; B3.0a smoke test pending hardware</li>
-      </ul>
-      <div class="evidence">
-        Source: github.com/Gonzo8285/MobileGame · Status: content complete, awaiting GPU image-gen
-      </div>
-    </div>
   </section>
 
   <section class="s" id="team">
@@ -465,7 +469,7 @@ footer.site a:hover { color: var(--brand); }
         <tr>
           <td>
             <strong>Paul McCann</strong>
-            <div class="role">Senior IT lead · ML2 owner</div>
+            <div class="role">Senior IT lead · ML² owner</div>
           </td>
           <td>Strategy · customer-facing · final authority · architecture and trade-off decisions</td>
           <td>In-room conversation</td>
@@ -518,15 +522,18 @@ ClaudeBridge v3 — message flow
   <section class="s" id="contact">
     <h2><span class="num">05 · Contact</span>Start a conversation</h2>
     <p class="intro">
-      The fastest way to find out whether ML2 fits is a 30-minute call. Bring a problem you'd like shipped this month.
+      The fastest way to find out whether ML² fits is a 30-minute call. Bring a problem you'd like shipped this month.
     </p>
     <div class="contact-card">
       <h2 style="margin-bottom: 6px;">Paul McCann</h2>
-      <p>ML2 Consulting · Senior IT + AI-multiplied delivery</p>
-      <p style="margin-top: 14px;">
+      <p>ML² Consulting · Senior IT + AI-multiplied delivery</p>
+      <div class="channels">
         <a class="email" href="mailto:Paul.mccann@rtkeedwellgroup.co.uk">Paul.mccann@rtkeedwellgroup.co.uk</a>
-        <a class="secondary" href="#cases">See the work first</a>
-      </p>
+        <a class="phone" href="tel:+447920050366">+44 7920 050366</a>
+      </div>
+      <div style="margin-top: 14px;">
+        <a class="secondary" href="#cases">See the work first →</a>
+      </div>
     </div>
   </section>
 
@@ -534,7 +541,7 @@ ClaudeBridge v3 — message flow
 
 <footer class="site">
   <div class="inner">
-    <div>ML2 Consulting Ltd · Senior IT + AI delivery team</div>
+    <div>ML² Consulting Ltd · Senior IT + AI delivery team</div>
     <div>
       Built and shipped by the Controller agent · <span id="built-at">2026-05-18</span> ·
       <a href="https://github.com/Gonzo8285/ml2-consulting" target="_blank" rel="noopener">source</a>
