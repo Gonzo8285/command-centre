@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://gonzo8285.github.io/ml2-consulting/sitemap.xml
