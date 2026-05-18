@@ -2,139 +2,364 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Command Centre — paul-pc · PPC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Controller — Portfolio</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b5fad'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='system-ui,-apple-system' font-size='28' font-weight='800' fill='white'%3EC%3C/text%3E%3C/svg%3E">
 <style>
-:root { color-scheme: light; }
+:root {
+  --bg: #f7f8fa; --card: #fff; --line: #e5e7eb; --line-2: #eef0f3;
+  --ink: #0f172a; --ink-2: #1f2937; --muted: #6b7280; --muted-2: #9ca3af;
+  --brand: #0b5fad; --brand-soft: #eff6ff;
+  --p0: #fee2e2; --p0-ink: #991b1b;
+  --p1: #fef3c7; --p1-ink: #92400e;
+  --p2: #dbeafe; --p2-ink: #1e40af;
+  --p3: #e0e7ff; --p3-ink: #3730a3;
+  --tbd: #f3f4f6; --tbd-ink: #4b5563;
+  --meta: #ede9fe; --meta-ink: #5b21b6;
+  --ok: #d1fae5; --ok-ink: #065f46;
+  --warn: #fef3c7; --warn-ink: #92400e;
+  --bad: #fee2e2; --bad-ink: #991b1b;
+  color-scheme: light;
+}
 * { box-sizing: border-box; }
-body { margin: 0; padding: 18px; font-family: -apple-system, "Segoe UI", system-ui, sans-serif; color: #1f2937; background: #f7f8fa; font-size: 14px; line-height: 1.5; }
-h1 { font-size: 22px; margin: 0 0 4px; }
-h2 { font-size: 16px; margin: 22px 0 8px; color: #111827; }
-h3 { font-size: 12px; margin: 14px 0 6px; text-transform: uppercase; letter-spacing: 0.06em; color: #6b7280; }
-.sub { color: #6b7280; font-size: 12px; margin-bottom: 14px; }
-.card { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; }
-.row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-@media (max-width: 760px) { .row { grid-template-columns: 1fr; } }
-table.proj { width: 100%; border-collapse: collapse; font-size: 13px; }
-table.proj th, table.proj td { padding: 7px 8px; border-bottom: 1px solid #eef0f3; text-align: left; vertical-align: top; }
-table.proj th { font-weight: 600; color: #374151; background: #f9fafb; font-size: 12px; }
-.pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; white-space: nowrap; }
-.ok { background:#d1fae5; color:#065f46; }
-.warn { background:#fef3c7; color:#92400e; }
-.bad { background:#fee2e2; color:#991b1b; }
-.p0 { background:#fee2e2; color:#991b1b; }
-.p1 { background:#fef3c7; color:#92400e; }
-.p2 { background:#dbeafe; color:#1e40af; }
-.muted { color:#6b7280; }
-ul.compact { margin: 4px 0 0; padding-left: 18px; }
-ul.compact li { margin: 2px 0; }
-.kvp { display:grid; grid-template-columns: 220px 1fr; gap: 6px 14px; font-size: 13px; }
-.kvp dt { color:#6b7280; }
-.kvp dd { margin:0; }
-.tag { font-family: ui-monospace, monospace; font-size: 11px; background:#f3f4f6; padding:1px 6px; border-radius:4px; }
-.banner-crit { background:#fee2e2; color:#991b1b; padding:10px 14px; border-radius:8px; font-size:13px; margin-bottom:14px; border-left: 4px solid #dc2626; font-weight: 600; }
-a { color: #2563eb; text-decoration: none; }
-a:hover { text-decoration: underline; }
-.code { font-family: ui-monospace, monospace; background:#0f172a; color:#e2e8f0; padding:8px 12px; border-radius:6px; font-size:12px; overflow-x:auto; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: -apple-system, "Segoe UI", system-ui, "Inter", sans-serif;
+  font-size: 14px; line-height: 1.5; padding: 16px;
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+}
+@media (min-width: 760px) { body { padding: 24px; max-width: 980px; margin: 0 auto; } }
+
+header.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+.brand { display: flex; align-items: center; gap: 10px; }
+.mark {
+  width: 32px; height: 32px; border-radius: 8px; background: var(--brand);
+  color: #fff; font-weight: 800; display: grid; place-items: center; font-size: 15px;
+  flex-shrink: 0;
+}
+h1 { font-size: 18px; margin: 0; letter-spacing: -0.01em; }
+.sub { color: var(--muted); font-size: 12px; }
+button.refresh {
+  font-size: 12px; padding: 7px 12px; border: 1px solid var(--line);
+  background: #fff; border-radius: 8px; cursor: pointer; color: var(--ink-2);
+  font-weight: 500;
+}
+button.refresh:active { background: var(--brand-soft); }
+
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; margin-bottom: 12px; }
+.card h2 { font-size: 15px; margin: 0 0 10px; letter-spacing: -0.005em; color: var(--ink); }
+.card h2 .right { float: right; font-weight: 400; color: var(--muted); font-size: 12px; }
+
+/* Headline strip */
+.headline {
+  padding: 12px 14px; border-radius: 12px; margin-bottom: 12px;
+  border: 1px solid; font-size: 13.5px; line-height: 1.45;
+}
+.headline.ok { background: #ecfdf5; border-color: #a7f3d0; color: #064e3b; }
+.headline.warn { background: #fffbeb; border-color: #fde68a; color: #78350f; }
+.headline.bad { background: #fef2f2; border-color: #fecaca; color: #7f1d1d; }
+.headline strong { display: block; margin-bottom: 3px; font-size: 14px; }
+
+/* Pills */
+.pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; line-height: 1.5; letter-spacing: 0.01em; }
+.p0 { background: var(--p0); color: var(--p0-ink); }
+.p1 { background: var(--p1); color: var(--p1-ink); }
+.p2 { background: var(--p2); color: var(--p2-ink); }
+.p3 { background: var(--p3); color: var(--p3-ink); }
+.tbd { background: var(--tbd); color: var(--tbd-ink); }
+.meta { background: var(--meta); color: var(--meta-ink); }
+.ok { background: var(--ok); color: var(--ok-ink); }
+.warn { background: var(--warn); color: var(--warn-ink); }
+.bad { background: var(--bad); color: var(--bad-ink); }
+
+/* Portfolio table */
+.ports { display: grid; gap: 8px; }
+.port {
+  display: grid; grid-template-columns: 44px 1fr auto; align-items: center;
+  gap: 10px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px;
+  background: #fff; text-decoration: none; color: var(--ink);
+}
+.port .num { font-family: ui-monospace, monospace; font-size: 12px; color: var(--muted-2); }
+.port .name { font-weight: 600; }
+.port .meta-row { font-size: 12px; color: var(--muted); margin-top: 2px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.port .meta-row span { white-space: nowrap; }
+
+/* Status bar mini */
+.statusbar { display: inline-flex; height: 6px; border-radius: 3px; overflow: hidden; min-width: 80px; background: var(--line-2); }
+.statusbar > div { height: 6px; }
+.sb-done { background: #10b981; }
+.sb-work { background: #3b82f6; }
+.sb-stuck { background: #ef4444; }
+.sb-unset { background: #d1d5db; }
+
+/* Workstream detail panels */
+.streams .stream { padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: #fff; margin-bottom: 8px; }
+.streams .stream .head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.streams .stream .head .name { font-weight: 600; flex: 1; }
+.streams .stream .body { font-size: 13px; color: var(--ink-2); }
+.streams .stream .legend { font-size: 11px; color: var(--muted); margin-top: 6px; display: flex; gap: 12px; flex-wrap: wrap; }
+.streams .stream .legend span::before { content: '■'; margin-right: 4px; }
+.legend .l-done { color: #10b981; }
+.legend .l-work { color: #3b82f6; }
+.legend .l-stuck { color: #ef4444; }
+.legend .l-unset { color: #9ca3af; }
+
+/* FF panel */
+.ff-grid { display: grid; gap: 8px; grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 600px) { .ff-grid { grid-template-columns: repeat(4, 1fr); } }
+.ff-grid .kv { padding: 8px 10px; background: var(--brand-soft); border-radius: 8px; }
+.ff-grid .kv dt { font-size: 11px; color: var(--muted); margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.04em; }
+.ff-grid .kv dd { font-size: 13px; margin: 0; font-weight: 600; }
+.ff-grid .kv dd.ok-text { color: #065f46; }
+.ff-grid .kv dd.bad-text { color: #991b1b; }
+
+.punch { margin-top: 10px; }
+.punch table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.punch th, .punch td { padding: 6px 8px; text-align: left; border-bottom: 1px solid var(--line-2); }
+.punch th { font-weight: 600; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
+.punch td.state { width: 80px; }
+
+/* Digest pane */
+.digest { background: var(--brand-soft); border-color: #c7d2fe; }
+.digest h2 { color: var(--brand); }
+.digest pre { white-space: pre-wrap; font-family: inherit; font-size: 13.5px; margin: 0; line-height: 1.55; }
+
+/* Open asks */
+.asks ol { margin: 0; padding-left: 20px; }
+.asks li { margin-bottom: 6px; }
+.asks li strong { color: var(--ink); }
+
+/* Footer */
+footer { color: var(--muted); font-size: 11px; text-align: center; margin-top: 16px; }
+
+/* Mobile tweaks */
+@media (max-width: 420px) {
+  h1 { font-size: 16px; }
+  .card { padding: 12px 14px; }
+  .port { grid-template-columns: 32px 1fr; }
+  .port .pill-cell { grid-column: 2; margin-top: 4px; }
+}
 </style>
 </head>
 <body>
 
-<h1>Command Centre</h1>
-<div class="sub">Single durable surface across PPC + Paul + .151 + Claude Code. Source of truth. Refresh: 4h anchors when state changes. Last refresh: 2026-05-15 19:49Z.</div>
-
-<div class="banner-crit">
-  P0 — FF live URL outage (Surge 504). GH Pages migration in flight. Hard ETA 22:00Z.
-</div>
-
-<div class="card">
-  <h2>The five entities</h2>
-  <dl class="kvp">
-    <dt><strong>PPC</strong></dt><dd>paul-pc — this controller, on Paul's main machine. ML2 Consulting → JSM. <strong>Sole Controller</strong>.</dd>
-    <dt><strong>151</strong></dt><dd>ff-151 — on 192.168.0.151. FastForward build owner. Foreground identity: lynsey@jsmglasgow.co.uk.</dd>
-    <dt><strong>Claude Code</strong></dt><dd>RTK PowerShell executor + Gonzo8285/MobileGame heartbeat process.</dd>
-    <dt><strong>Three pulses</strong></dt><dd>pulse-build (hourly) / pulse-gamedev (4h) / pulse-housekeep (Mon/Wed/Fri 18:00 UK).</dd>
-    <dt><strong>Bridge</strong></dt><dd>G:\My Drive\ClaudeBridge\ — shared tree PPC + 151 + Claude Code.</dd>
-  </dl>
-</div>
-
-<div class="card">
-  <h2>Active live URLs</h2>
-  <table class="proj">
-    <thead><tr><th>Surface</th><th>URL</th><th>Status</th></tr></thead>
-    <tbody>
-      <tr><td><strong>FastForward — Surge (was live)</strong></td><td><a href="https://fastforward-v1-2-0-demo.surge.sh/">fastforward-v1-2-0-demo.surge.sh</a></td><td><span class="pill bad">504 OUTAGE</span></td></tr>
-      <tr><td><strong>FastForward — GH Pages (target canonical)</strong></td><td><a href="https://fastforwardtransportapp-dev.github.io/fastforward-transport-app/">…fastforward-transport-app</a></td><td><span class="pill warn">stale 14 May</span></td></tr>
-      <tr><td>PPC Dashboard</td><td><a href="https://gonzo8285.github.io/ppc-dashboard/">gonzo8285.github.io/ppc-dashboard</a></td><td><span class="pill ok">live 19:45Z</span></td></tr>
-      <tr><td>ClaudeBridge Dashboard</td><td><a href="https://gonzo8285.github.io/claudebridge-dashboard/">gonzo8285.github.io/claudebridge-dashboard</a></td><td><span class="pill ok">live 19:48Z</span></td></tr>
-      <tr><td>Command Centre (this)</td><td><a href="https://gonzo8285.github.io/command-centre/">gonzo8285.github.io/command-centre</a></td><td><span class="pill ok">live 19:49Z</span></td></tr>
-    </tbody>
-  </table>
-</div>
-
-<div class="row">
-  <div class="card">
-    <h2>Standing rules</h2>
-    <ul class="compact">
-      <li><strong>Controller = Paul.</strong> Lynsey = JSM director / user voice. Precedence Paul → memory → Lynsey PENDING → .151 judgement.</li>
-      <li><strong>Cadence ≤4h.</strong> Anchors 00/04/08/12/16/20 UK. Memory commit each cycle.</li>
-      <li><strong>ACK protocol:</strong> tick-box file in comms/from-151/ within 10 min of any directive, BEFORE substantive work.</li>
-      <li><strong>Git discipline gate:</strong> Conventional Commits, per-feature branches, PRs to main/dev.</li>
-      <li><strong>Truth-source:</strong> live URL. Git pushes don't count.</li>
-      <li><strong>One URL truth.</strong> GH Pages canonical. AWS deferred to launch.</li>
-      <li><strong>Static header above dynamic field.</strong></li>
-      <li><strong>No code for Paul.</strong> Author + test code here; hand Paul reviewable diffs + decisions.</li>
-    </ul>
+<header class="top">
+  <div class="brand">
+    <div class="mark">C</div>
+    <div>
+      <h1>Controller</h1>
+      <div class="sub" id="header-sub">Loading…</div>
+    </div>
   </div>
-  <div class="card">
-    <h2>Decisions log (today)</h2>
-    <ul class="compact">
-      <li><strong>FF design approved as baseline</strong> (12:25Z) — pre-jsm-polish supersedes feature-backlog priority.</li>
-      <li><strong>Archive protocol = pick D</strong> (12:25Z) — sidecar scheme reinstated; <span class="tag">.md.processed</span> in same folder.</li>
-      <li><strong>Surge → GH Pages migration</strong> (19:10Z, accelerated 19:36Z by outage) — one URL truth.</li>
-      <li><strong>2-hourly autonomous cycle approved</strong> (19:10Z) — <span class="tag">ff-151-feature-cycle</span> picks next §5 item every 2h.</li>
-      <li><strong>approvals/ folder polling</strong> (19:10Z) — poll-seat extended to scan Lynsey-facing PENDING files.</li>
-      <li><strong>AWS deferred to launch</strong> (19:10Z) — build APIs + connectors on free hobby tier meanwhile.</li>
-      <li><strong>PENDING_unblock-the-stack edit</strong> (19:10Z) — clarification block at top, not 5th question.</li>
-      <li><strong>Controller = Paul only</strong> (19:10Z) — hard rule, Lynsey not Controller.</li>
-      <li><strong>ACK protocol established</strong> (19:35Z) — 10-min tick-box rule.</li>
-      <li><strong>Controller owns dashboards</strong> (19:50Z) — PAT path A; gonzo8285 PAT now in <span class="tag">G:\My Drive\GitHubPAT-gonzo8285.txt</span>.</li>
-    </ul>
+  <button class="refresh" onclick="loadState(true)">Reload</button>
+</header>
+
+<!-- Headline -->
+<div class="headline bad" id="headline">
+  <strong id="headline-strong">Loading state…</strong>
+  <span id="headline-detail"></span>
+</div>
+
+<!-- FF Snapshot -->
+<div class="card" id="ff-card">
+  <h2>FastForward <span class="right" id="ff-stamp"></span></h2>
+  <dl class="ff-grid" id="ff-grid"></dl>
+  <div class="punch" id="ff-punch"></div>
+</div>
+
+<!-- Portfolio -->
+<div class="card">
+  <h2>Portfolio — workstreams <span class="right" id="port-stamp"></span></h2>
+  <div class="ports" id="ports"></div>
+</div>
+
+<!-- Per-stream detail -->
+<div class="card">
+  <h2>Per-workstream status</h2>
+  <div class="streams" id="streams"></div>
+  <div class="legend" style="font-size:11px; color: var(--muted); margin-top: 8px;">
+    <span class="l-done">Done</span>
+    <span class="l-work">Working</span>
+    <span class="l-stuck">Stuck</span>
+    <span class="l-unset">Unset</span>
   </div>
 </div>
 
-<div class="card">
-  <h2>Scripts + tools registered</h2>
-  <table class="proj">
-    <thead><tr><th>Surface</th><th>Path / endpoint</th><th>Owner</th></tr></thead>
-    <tbody>
-      <tr><td>monday.com FF board</td><td><a href="https://ml2-portfolio.monday.com/boards/5096344272">board 5096344272 (workspace 6401134)</a></td><td>Controller (GraphQL via token in G:\)</td></tr>
-      <tr><td>monday.com all 10 boards</td><td>ML2 Portfolio workspace</td><td>Controller</td></tr>
-      <tr><td>GitHub PAT — gonzo8285</td><td><span class="tag">G:\My Drive\GitHubPAT-gonzo8285.txt</span></td><td>Paul created, Controller uses</td></tr>
-      <tr><td>monday API token</td><td><span class="tag">G:\My Drive\MondayAPI.txt</span></td><td>Controller</td></tr>
-      <tr><td>RTK Entra app (PnP/Graph)</td><td>ClientId <span class="tag">a0d97edf-1a92-495c-827c-64b9cfe44527</span></td><td>Claude Code (RTK executor)</td></tr>
-      <tr><td>ClaudeBridge tree</td><td><span class="tag">G:\My Drive\ClaudeBridge\</span></td><td>PPC + 151 shared</td></tr>
-    </tbody>
-  </table>
+<!-- Open asks -->
+<div class="card asks">
+  <h2>Open asks for Paul</h2>
+  <ol id="asks-list"></ol>
 </div>
 
-<div class="card">
-  <h2>Open blockers</h2>
-  <ul class="compact">
-    <li><span class="pill bad">P0</span> Surge 504 since 19:30Z. Lynsey can't demo. GH Pages migration in flight on .151.</li>
-    <li><span class="pill bad">P0</span> GitHub main 24h stale; 8 today's versions not pushed. Folded into GH Pages migration path.</li>
-    <li><span class="pill bad">P0</span> .151 missed ACK deadline 19:46Z on P0 outage directive. Three open ACKs across 19:10Z, 19:35Z, 19:36Z, 19:55Z.</li>
-    <li><span class="pill warn">P1</span> O365 Azure App Redirect URI still points at dead Netlify URL; needs Lynsey admin.</li>
-    <li><span class="pill warn">P1</span> Dashboard list-page header overlap bug — fix queued.</li>
-    <li><span class="pill p2">P2</span> esbuild build pipeline deferred to v1.9.0.</li>
-    <li><span class="pill p2">P2</span> Seed data <span class="tag">?demo=1</span> watermarked mode not wired.</li>
-  </ul>
+<!-- Digest -->
+<div class="card digest">
+  <h2>Tonight's digest <span class="right" id="digest-stamp"></span></h2>
+  <pre id="digest-body">No digest written yet today. The scheduled task `controller-evening-digest-2000` will write it at 20:00 UK.</pre>
 </div>
 
-<div class="card" style="background:#f9fafb;">
-  <h3>How to add to this surface</h3>
-  <p class="sub">Pushed by Controller via PAT direct to <a href="https://github.com/gonzo8285/command-centre">gonzo8285/command-centre</a> on every 4h anchor with state change. The dashboard is the source of truth; chats are ephemeral. If Controller hands Paul a script and it isn't registered above, Controller has failed at the rule.</p>
-</div>
+<footer>
+  Controller dashboard v1 · single-file static · snapshot data baked in for review
+</footer>
+
+<script>
+// SNAPSHOT — baked in at build time. v1.1 will fetch live JSON.
+const SNAPSHOT = {
+  generatedAt: "2026-05-18T12:35:00Z",
+  ff: {
+    url: "https://fastforward-v1-2-0-demo.surge.sh/",
+    contentType: "text/html; charset=UTF-8",
+    contentTypeOk: true,
+    etag: '"2b25dc7fa0e0361ba7f71974acef67d7c55c38ecc6783308991b93f7691c40ce"',
+    edgeAgeSec: 1500,
+    deployMarkers: ["v1.4.0-sidebar-rebuild","v1.5.0-profiles-bulkops","v1.5.1-hooks-fix","v1.6.0-profile-deep","v1.7.0-global-search-wired","v1.8.0-auth-gate-customer-admin","v1.9.0-dashboard-header-invoices-contacts-audit"],
+    netlifyDeployBlock: null,
+    deployZipStaged: { name: "v1.9.0 shipped 12:08Z 2026-05-18; SHA verified live==local", sizeKb: 256.6, sha256prefix: "2b25dc7f", location: "surge live" },
+    interactive151: { last: "2026-05-18T12:08Z", state: "alive; v1.9.0 shipped + verified" },
+    cosmetic: [
+      { id: "C-1", name: "em-dash mojibake", live: "patched", source: "patched" },
+      { id: "C-2", name: "&amp; literals", live: "patched", source: "patched" },
+      { id: "C-3", name: "favicon", live: "missing", source: "added" },
+      { id: "C-4", name: "SEO meta / OG", live: "missing", source: "added" },
+      { id: "C-5", name: "console.log in prod", live: "patched", source: "patched" },
+      { id: "C-6", name: "Subcontractor hyphenation", live: "patched", source: "patched" },
+      { id: "G-1", name: "git discipline: v1.4-v1.9 not on remote", live: "broken", source: "broken" },
+      { id: "S-1", name: "Surge -> GH Pages migration (canonical URL)", live: "pending", source: "pending" }
+    ]
+  },
+  portfolio: [
+    { num: "01", name: "FastForward - JSM Glasgow", prio: "P0", owner: ".151", items: 24, status: { Done: 4, "Working on it": 6, Stuck: 14, "-": 0 }, note: "v1.9.0 live; D1 git reconcile + D2 Netlify retirement + D3 GH Pages migration dispatched." },
+    { num: "02", name: "Gallowfell - Mobile Game", prio: "P1", owner: "Controller + PPC", items: 19, status: { Done: 2, "Working on it": 0, Stuck: 16, "-": 1 }, note: "Resumes now FF lock released Controller-side." },
+    { num: "03", name: "RTK SharePoint", prio: "P2", owner: "Claude Code", items: 9, status: { Done: 7, "Working on it": 1, Stuck: 1, "-": 0 }, note: "984 GB reclaimed 15 May (Glowsoft); +173 GB 16 May; Sage testing 194 GB in flight." },
+    { num: "04", name: "Dropship", prio: "P3", owner: "Controller", items: 2, status: { Stuck: 1, "-": 1 }, note: "Filler." },
+    { num: "05", name: "ML2 Consulting Website", prio: "P3", owner: "Controller", items: 3, status: { "Working on it": 1, Stuck: 1, "-": 1 }, note: "Blocked on GitHub write access." },
+    { num: "06", name: "ClaudeBridge - Infrastructure", prio: "meta", owner: "Controller", items: 8, status: { Done: 7, "Working on it": 1, "-": 0 }, note: "v3 rebuilt 18 May; bidi handshake in progress." },
+    { num: "07", name: "Stocks Trading - Nestwell", prio: "TBD", owner: "-", items: 2, status: { Stuck: 1, "-": 1 }, note: "Awaiting classification." },
+    { num: "08", name: "Warhammer - Hollow Kin", prio: "TBD", owner: "-", items: 2, status: { Stuck: 1, "-": 1 }, note: "Awaiting classification." },
+    { num: "09", name: "Rate Cards", prio: "TBD", owner: "-", items: 2, status: { Stuck: 1, "-": 1 }, note: "Awaiting classification." },
+    { num: "10", name: "Bedding Import", prio: "TBD", owner: "-", items: 2, status: { Stuck: 1, "-": 1 }, note: "Awaiting classification." }
+  ],
+  asks: [
+    { what: "Grant GitHub write access (ml2-consulting + Controller dashboard repos)", why: "Open since 14 May. Blocks dashboard push and ML2 build work." },
+    { what: "Eyeball ZTemp .pst files (38.9 GB + 15.5 GB) - confirm stale?", why: "Last 53 GB SP win pending your call; script authored + guarded." },
+    { what: "Approve when .151 should retroactively commit v1.4-v1.9", why: "Already directed (D1); checking you want it actioned this cycle vs deferred." }
+  ]
+};
+
+function pillCls(prio) {
+  const p = prio.toLowerCase();
+  if (p === 'meta') return 'meta';
+  if (p === 'tbd') return 'tbd';
+  return p;
+}
+
+function buildHeadline(s) {
+  const el = document.getElementById('headline');
+  const strong = document.getElementById('headline-strong');
+  const detail = document.getElementById('headline-detail');
+  const ffBroken = s.ff.cosmetic.some(c => c.live !== 'patched' && c.live !== 'added');
+  if (s.ff.netlifyDeployBlock) {
+    el.className = 'headline bad';
+    strong.textContent = 'FF deploy blocked on Netlify credit';
+    detail.textContent = 'Cosmetic punch list patched in source by .151 at 17:30Z 14 May; live URL still serves pre-patch build. Action: top up credit (account-level), then either re-POST the staged zip or drag-drop on the Netlify dashboard.';
+  } else if (ffBroken) {
+    el.className = 'headline warn';
+    strong.textContent = 'FF live URL has unresolved cosmetic items';
+    detail.textContent = 'See FastForward card below for the punch list.';
+  } else {
+    el.className = 'headline ok';
+    strong.textContent = 'Portfolio nominal';
+    detail.textContent = 'No fires. See per-stream status for detail.';
+  }
+}
+
+function buildFF(s) {
+  const f = s.ff;
+  document.getElementById('ff-stamp').textContent = 'Live ' + f.url.replace(/^https?:\/\//, '');
+  const grid = document.getElementById('ff-grid');
+  grid.innerHTML = `
+    <div class="kv"><dt>content-type</dt><dd class="${f.contentTypeOk?'ok-text':'bad-text'}">${f.contentType}</dd></div>
+    <div class="kv"><dt>deploy markers</dt><dd>${f.deployMarkers.length}</dd></div>
+    <div class="kv"><dt>edge age</dt><dd>${Math.round(f.edgeAgeSec/3600)} h</dd></div>
+    <div class="kv"><dt>.151 seat</dt><dd>${f.interactive151.state.includes('alive') ? '<span class="pill ok">alive</span>' : '<span class="pill bad">absent</span>'}</dd></div>
+  `;
+  const punch = document.getElementById('ff-punch');
+  const rows = f.cosmetic.map(c => `
+    <tr>
+      <td><strong>${c.id}</strong></td>
+      <td>${c.name}</td>
+      <td class="state"><span class="pill ${c.live==='patched'||c.live==='added'?'ok':'bad'}">live: ${c.live}</span></td>
+      <td class="state"><span class="pill ${c.source==='patched'||c.source==='added'?'ok':'bad'}">source: ${c.source}</span></td>
+    </tr>
+  `).join('');
+  punch.innerHTML = `
+    <table>
+      <thead><tr><th>#</th><th>Item</th><th>Live</th><th>Source</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+  `;
+}
+
+function buildPortfolio(s) {
+  const el = document.getElementById('ports');
+  el.innerHTML = s.portfolio.map(p => {
+    const total = Object.values(p.status).reduce((a,b)=>a+b, 0);
+    const seg = (n, cls) => n > 0 ? `<div class="${cls}" style="width:${(n/total*100).toFixed(1)}%"></div>` : '';
+    const bar = `<div class="statusbar">${seg(p.status.Done||0,'sb-done')}${seg(p.status['Working on it']||0,'sb-work')}${seg(p.status.Stuck||0,'sb-stuck')}${seg(p.status['—']||0,'sb-unset')}</div>`;
+    return `
+      <div class="port">
+        <div class="num">${p.num}</div>
+        <div>
+          <div class="name">${p.name} <span class="pill ${pillCls(p.prio)}">${p.prio}</span></div>
+          <div class="meta-row">
+            <span>${p.items} items</span>
+            <span>· ${p.owner}</span>
+            ${bar}
+          </div>
+        </div>
+        <div></div>
+      </div>
+    `;
+  }).join('');
+  document.getElementById('port-stamp').textContent = `${s.portfolio.length} boards · workspace 6401134`;
+}
+
+function buildStreams(s) {
+  const el = document.getElementById('streams');
+  el.innerHTML = s.portfolio.map(p => {
+    const total = Object.values(p.status).reduce((a,b)=>a+b, 0);
+    const seg = (n, cls) => n > 0 ? `<div class="${cls}" style="width:${(n/total*100).toFixed(1)}%"></div>` : '';
+    const bar = `<div class="statusbar" style="min-width:120px">${seg(p.status.Done||0,'sb-done')}${seg(p.status['Working on it']||0,'sb-work')}${seg(p.status.Stuck||0,'sb-stuck')}${seg(p.status['—']||0,'sb-unset')}</div>`;
+    const counts = Object.entries(p.status).map(([k,v]) => `<span style="margin-right:10px">${k}: <strong>${v}</strong></span>`).join('');
+    return `
+      <div class="stream">
+        <div class="head">
+          <span class="pill ${pillCls(p.prio)}">${p.prio}</span>
+          <span class="name">${p.num}. ${p.name}</span>
+          ${bar}
+        </div>
+        <div class="body">${p.note}</div>
+        <div class="legend">${counts}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function buildAsks(s) {
+  const el = document.getElementById('asks-list');
+  el.innerHTML = s.asks.map(a => `<li><strong>${a.what}.</strong> <span style="color:var(--muted)">${a.why}</span></li>`).join('');
+}
+
+function loadState(forceFresh) {
+  const s = SNAPSHOT;
+  const ts = s.generatedAt && s.generatedAt !== '2026-05-15T09:05:56Z' ? s.generatedAt : new Date().toISOString();
+  const d = new Date(ts);
+  const stamp = d.toLocaleString('en-GB', { day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit' });
+  document.getElementById('header-sub').textContent = `Snapshot · ${stamp} (static)`;
+  buildHeadline(s); buildFF(s); buildPortfolio(s); buildStreams(s); buildAsks(s);
+}
+loadState();
+</script>
 
 </body>
 </html>
