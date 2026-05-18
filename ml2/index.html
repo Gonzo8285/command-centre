@@ -8,7 +8,12 @@
 <meta property="og:title" content="ML² Consulting — Senior IT + AI delivery team">
 <meta property="og:description" content="We ship in a day, not a quarter. Senior IT judgement, AI-multiplied delivery.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://gonzo8285.github.io/ml2-consulting/">
+<meta property="og:image" content="https://gonzo8285.github.io/ml2-consulting/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2563EB">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232563EB'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Inter,system-ui,sans-serif' font-size='26' font-weight='900' fill='white' letter-spacing='-1.5'%3EML%3C/text%3E%3Ctext x='52' y='26' font-family='Inter,system-ui,sans-serif' font-size='14' font-weight='800' fill='white'%3E2%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%232563EB'/%3E%3Ctext x='90' y='124' text-anchor='middle' font-family='Inter,system-ui,sans-serif' font-size='74' font-weight='900' fill='white' letter-spacing='-4'%3EML%3C/text%3E%3Ctext x='146' y='74' font-family='Inter,system-ui,sans-serif' font-size='40' font-weight='800' fill='white'%3E2%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://rsms.me/">
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 <style>
@@ -37,7 +42,7 @@
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
   background: var(--bg);
   color: var(--ink);
@@ -46,124 +51,159 @@ body {
   line-height: 1.55;
   font-feature-settings: "ss01", "cv11";
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 a { color: var(--brand); text-decoration: none; }
 a:hover { text-decoration: underline; }
+a:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; border-radius: 4px; }
 h1, h2, h3, h4 { letter-spacing: -0.02em; line-height: 1.2; margin-top: 0; }
-h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 800; }
-h2 { font-size: clamp(24px, 3vw, 30px); font-weight: 700; margin-bottom: 12px; }
+h1 { font-size: clamp(30px, 5vw, 48px); font-weight: 800; }
+h2 { font-size: clamp(22px, 3vw, 30px); font-weight: 700; margin-bottom: 12px; }
 h3 { font-size: 18px; font-weight: 650; margin-bottom: 6px; }
 p { margin-top: 0; }
-.mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.92em; }
 
-/* Layout */
+/* Header */
 header.site {
   position: sticky; top: 0; z-index: 30;
-  background: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.88);
   backdrop-filter: saturate(180%) blur(12px);
   -webkit-backdrop-filter: saturate(180%) blur(12px);
   border-bottom: 1px solid var(--line);
 }
 header.site .inner {
-  max-width: var(--max); margin: 0 auto; padding: 14px 24px;
-  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  max-width: var(--max); margin: 0 auto; padding: 12px 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
 }
 .brand {
   display: flex; align-items: center; gap: 12px;
   font-weight: 700; color: var(--ink); text-decoration: none;
+  min-width: 0;
 }
-.brand .mark { display: block; }
-.brand .mark svg { display: block; width: 36px; height: 36px; border-radius: 9px; }
+.brand .mark svg { display: block; width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0; }
 .brand .name {
-  font-size: 17px; font-weight: 700;
-  display: flex; align-items: baseline; gap: 6px;
+  font-size: 16px; font-weight: 700;
+  display: flex; align-items: baseline; gap: 4px;
+  white-space: nowrap;
 }
 .brand .name .ml { letter-spacing: -0.02em; }
-.brand .name .squared { font-size: 11px; font-weight: 800; position: relative; top: -7px; color: var(--brand); }
-.brand .name .consulting { font-weight: 500; color: var(--muted); margin-left: -2px; }
+.brand .name .squared { font-size: 11px; font-weight: 800; position: relative; top: -7px; color: var(--brand); margin-left: -2px; }
+.brand .name .consulting { font-weight: 500; color: var(--muted); margin-left: 4px; }
 @media (max-width: 480px) {
   .brand .name .consulting { display: none; }
 }
-nav.primary { display: flex; gap: 4px; }
+nav.primary { display: flex; gap: 2px; }
 nav.primary a {
-  color: var(--ink-2); padding: 6px 12px; border-radius: 8px;
+  color: var(--ink-2); padding: 6px 10px; border-radius: 8px;
   font-size: 14px; font-weight: 500;
 }
 nav.primary a:hover { background: var(--brand-soft); color: var(--brand); text-decoration: none; }
-@media (max-width: 640px) {
+@media (max-width: 720px) {
   nav.primary { display: none; }
 }
 .cta {
   display: inline-block;
-  padding: 8px 14px;
+  padding: 9px 14px;
   background: var(--brand); color: white;
   border-radius: 8px; font-weight: 600; font-size: 14px;
+  white-space: nowrap;
+  min-height: 38px; line-height: 20px;
 }
 .cta:hover { background: var(--accent); color: white; text-decoration: none; }
 .cta-outline {
   display: inline-block;
-  padding: 8px 14px;
+  padding: 9px 14px;
   border: 1px solid var(--line); background: white;
   color: var(--ink); border-radius: 8px; font-weight: 600; font-size: 14px;
+  min-height: 38px; line-height: 20px;
 }
 .cta-outline:hover { background: var(--bg); text-decoration: none; }
 
 main { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
 
 /* Hero */
-.hero { padding: 72px 0 56px; }
+.hero { padding: 64px 0 48px; }
 .hero .eyebrow {
   display: inline-block; padding: 4px 10px; border-radius: 999px;
   background: var(--brand-soft); color: var(--brand); font-size: 12px;
   font-weight: 600; letter-spacing: 0.02em; margin-bottom: 18px;
 }
 .hero p.lead {
-  font-size: clamp(17px, 1.8vw, 19px); color: var(--ink-2);
+  font-size: clamp(16px, 1.8vw, 19px); color: var(--ink-2);
   max-width: 720px; margin-bottom: 26px;
 }
 .hero .cta-row { display: flex; gap: 10px; flex-wrap: wrap; }
 
 /* Stats strip */
 .stats {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 14px; margin-top: 36px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px; margin-top: 32px;
 }
 .stat {
   background: var(--card); border: 1px solid var(--line); border-radius: 12px;
-  padding: 16px 18px;
+  padding: 14px 16px;
 }
-.stat .n { font-size: 28px; font-weight: 800; color: var(--brand); letter-spacing: -0.02em; }
-.stat .l { font-size: 13px; color: var(--muted); margin-top: 2px; }
+.stat .n { font-size: 26px; font-weight: 800; color: var(--brand); letter-spacing: -0.02em; }
+.stat .l { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
 
 /* Section */
-section.s { padding: 56px 0; border-top: 1px solid var(--line); }
-section.s.no-line { border-top: 0; }
+section.s { padding: 52px 0; border-top: 1px solid var(--line); }
 section.s h2 .num {
   font-size: 12px; color: var(--muted-2); font-weight: 500;
   letter-spacing: 0.04em; display: block; margin-bottom: 6px;
 }
-section.s p.intro { color: var(--ink-2); max-width: 720px; margin-bottom: 28px; }
+section.s p.intro { color: var(--ink-2); max-width: 720px; margin-bottom: 26px; }
 
 /* Cards */
-.cards { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.cards { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 .card {
   background: var(--card); border: 1px solid var(--line); border-radius: 12px;
-  padding: 22px;
+  padding: 20px;
 }
 .card h3 { color: var(--ink); }
 .card p { color: var(--ink-2); font-size: 14.5px; margin-bottom: 0; }
 .card .icon {
-  width: 32px; height: 32px; border-radius: 8px; background: var(--brand-soft);
+  width: 30px; height: 30px; border-radius: 8px; background: var(--brand-soft);
   color: var(--brand); display: grid; place-items: center;
   font-weight: 700; font-size: 16px; margin-bottom: 12px;
 }
 
+/* How we work — flow */
+.flow {
+  margin-top: 8px;
+  display: grid; gap: 12px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 760px) {
+  .flow { grid-template-columns: repeat(4, 1fr); }
+}
+.flow .stage {
+  background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+  padding: 18px 18px; position: relative;
+}
+.flow .stage .step {
+  display: inline-block; width: 26px; height: 26px;
+  background: var(--brand); color: white; border-radius: 50%;
+  text-align: center; line-height: 26px; font-weight: 800; font-size: 13px;
+  margin-bottom: 10px;
+}
+.flow .stage h3 { margin: 0 0 6px; font-size: 16px; }
+.flow .stage p { color: var(--ink-2); font-size: 13.5px; margin: 0; }
+.flow .stage .meta { color: var(--muted); font-size: 11.5px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; margin-top: 8px; }
+
+/* SVG flow diagram container */
+.flow-svg-wrap {
+  background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+  padding: 18px; margin-top: 14px;
+  overflow-x: auto;
+}
+.flow-svg-wrap svg { display: block; width: 100%; height: auto; max-width: 100%; min-width: 600px; }
+
 /* Case studies */
 .case {
   background: var(--card); border: 1px solid var(--line); border-radius: 12px;
-  padding: 22px; margin-bottom: 12px;
+  padding: 20px; margin-bottom: 12px;
 }
-.case .head { display: flex; align-items: flex-start; gap: 12px; justify-content: space-between; flex-wrap: wrap; }
+.case .head { display: flex; align-items: flex-start; gap: 10px; justify-content: space-between; flex-wrap: wrap; }
 .case h3 { margin-bottom: 4px; }
 .case .meta { font-size: 12px; color: var(--muted); }
 .case .pill {
@@ -177,20 +217,19 @@ section.s p.intro { color: var(--ink-2); max-width: 720px; margin-bottom: 28px; 
 .case ul li { margin-bottom: 4px; }
 .case .evidence {
   margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line-2);
-  font-size: 13px; color: var(--muted);
+  font-size: 12.5px; color: var(--muted);
 }
-.case .evidence a { color: var(--brand); }
 
 /* Team table */
 table.team {
-  width: 100%; border-collapse: collapse; margin-top: 16px;
+  width: 100%; border-collapse: collapse; margin-top: 14px;
   background: var(--card); border: 1px solid var(--line); border-radius: 12px;
   overflow: hidden;
 }
 table.team thead th {
-  text-align: left; background: #f8fafc; font-size: 12px; color: var(--muted);
+  text-align: left; background: #f8fafc; font-size: 11.5px; color: var(--muted);
   letter-spacing: 0.04em; text-transform: uppercase; padding: 10px 14px;
-  position: sticky; top: 0; border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--line); font-weight: 600;
 }
 table.team td {
   padding: 12px 14px; font-size: 14.5px; vertical-align: top;
@@ -200,47 +239,50 @@ table.team tr:last-child td { border-bottom: 0; }
 table.team td strong { color: var(--ink); display: block; }
 table.team td .role { color: var(--muted); font-size: 12.5px; margin-top: 2px; }
 
-/* Operating model */
-.bridge-diagram {
-  margin-top: 18px;
-  padding: 18px; background: var(--card); border: 1px solid var(--line); border-radius: 12px;
-  font-family: ui-monospace, "SF Mono", Menlo, monospace;
-  font-size: 12.5px; line-height: 1.7; color: var(--ink-2);
-  overflow-x: auto;
+@media (max-width: 600px) {
+  table.team thead { display: none; }
+  table.team tr {
+    display: block; padding: 10px 14px;
+    border-bottom: 1px solid var(--line-2);
+  }
+  table.team td {
+    display: block; padding: 4px 0; border-bottom: 0;
+  }
+  table.team td:first-child strong { font-size: 15px; }
 }
 
 /* Contact */
 .contact-card {
   background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
-  color: white; border-radius: 16px; padding: 36px;
+  color: white; border-radius: 16px; padding: 30px 24px;
 }
-.contact-card h2 { color: white; }
+.contact-card h2 { color: white; margin-bottom: 4px; }
 .contact-card p { color: rgba(255,255,255,0.92); }
 .contact-card .channels { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px; }
 .contact-card a.email {
-  display: inline-block; padding: 12px 20px;
+  display: inline-block; padding: 12px 18px;
   background: white; color: var(--brand); border-radius: 10px;
-  font-weight: 700; font-size: 16px;
+  font-weight: 700; font-size: 15px;
+  min-height: 44px; line-height: 20px;
 }
 .contact-card a.email:hover { background: var(--brand-soft); text-decoration: none; }
 .contact-card a.phone {
-  display: inline-block; padding: 12px 20px;
+  display: inline-block; padding: 12px 18px;
   background: rgba(255,255,255,0.18); color: white; border-radius: 10px;
-  font-weight: 700; font-size: 16px;
+  font-weight: 700; font-size: 15px;
   border: 1px solid rgba(255,255,255,0.3);
+  min-height: 44px; line-height: 20px;
 }
 .contact-card a.phone:hover { background: rgba(255,255,255,0.28); text-decoration: none; }
 .contact-card .secondary {
-  display: inline-block; padding: 12px 20px;
-  background: transparent; color: white; border-radius: 10px;
-  font-weight: 600; font-size: 15px;
-  text-decoration: underline;
+  display: inline-block; padding: 8px 0; color: white;
+  font-weight: 600; font-size: 14px;
+  text-decoration: underline; margin-top: 8px;
 }
-.contact-card .secondary:hover { background: rgba(255,255,255,0.1); text-decoration: none; }
 
 /* Footer */
 footer.site {
-  border-top: 1px solid var(--line); padding: 36px 24px; margin-top: 36px;
+  border-top: 1px solid var(--line); padding: 30px 24px; margin-top: 24px;
   color: var(--muted); font-size: 13px;
 }
 footer.site .inner {
@@ -255,24 +297,49 @@ footer.site a:hover { color: var(--brand); }
   background: var(--ink);
   color: white;
   border-radius: 16px;
-  padding: 36px;
-  margin-top: 16px;
+  padding: 28px 24px;
+  margin-top: 14px;
 }
 .manifesto p.q {
-  font-size: clamp(18px, 2vw, 22px);
-  line-height: 1.5; margin: 0;
+  font-size: clamp(17px, 2vw, 22px);
+  line-height: 1.45; margin: 0;
   color: rgba(255,255,255,0.95);
 }
 .manifesto .who {
-  margin-top: 18px; font-size: 13px; color: rgba(255,255,255,0.7);
+  margin-top: 16px; font-size: 12.5px; color: rgba(255,255,255,0.7);
   letter-spacing: 0.02em;
 }
 
+/* Cookie notice */
+.cookie-note {
+  position: fixed; bottom: 12px; left: 12px; right: 12px;
+  max-width: 540px; margin: 0 auto;
+  background: var(--ink); color: rgba(255,255,255,0.95);
+  border-radius: 12px; padding: 14px 18px;
+  font-size: 13px; line-height: 1.45;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  z-index: 50;
+}
+.cookie-note button {
+  background: var(--brand); color: white; border: 0;
+  padding: 8px 14px; border-radius: 8px; font-weight: 700;
+  cursor: pointer; font-size: 13px; min-height: 36px;
+  font-family: inherit;
+}
+.cookie-note button:hover { background: var(--accent); }
+.cookie-note a { color: white; text-decoration: underline; }
+
 @media (max-width: 720px) {
-  main { padding: 0 18px; }
-  header.site .inner { padding: 12px 18px; }
-  .hero { padding: 48px 0 40px; }
-  section.s { padding: 40px 0; }
+  main { padding: 0 16px; }
+  header.site .inner { padding: 10px 16px; gap: 10px; }
+  .hero { padding: 40px 0 32px; }
+  section.s { padding: 36px 0; }
+  .cta, .cta-outline { padding: 10px 14px; font-size: 14px; min-height: 40px; }
+}
+@media (max-width: 380px) {
+  h1 { font-size: 28px; }
+  .stat .n { font-size: 22px; }
 }
 </style>
 </head>
@@ -295,8 +362,9 @@ footer.site a:hover { color: var(--brand); }
     </a>
     <nav class="primary">
       <a href="#services">Services</a>
+      <a href="#how">How we work</a>
       <a href="#cases">Case studies</a>
-      <a href="#team">Team stack</a>
+      <a href="#team">Team</a>
       <a href="#contact">Contact</a>
     </nav>
     <a href="#contact" class="cta">Start a conversation</a>
@@ -309,20 +377,20 @@ footer.site a:hover { color: var(--brand); }
     <span class="eyebrow">SENIOR IT — AI-MULTIPLIED DELIVERY</span>
     <h1>We ship in a day, not a quarter.</h1>
     <p class="lead">
-      ML² Consulting is Paul McCann — 25 years of senior IT — plus three AI agents operating as a single delivery team.
-      We design, build, ship and run software for SMBs at enterprise pace.
-      The same team that wrote this page shipped nine versions of a transport platform to a live URL this week, cleaned up over a terabyte of misfiled SharePoint data, and ran a multi-machine agent protocol across two laptops to do it.
+      ML² Consulting is Paul McCann — 25 years of senior IT — plus a team of AI agents operating as a single delivery unit.
+      We design, build, ship, and run software for SMBs at enterprise pace.
+      The same operating model that wrote this page ships production software, end-to-end, into customer environments — and the AI is how the work gets done, not a feature we sell.
     </p>
     <div class="cta-row">
-      <a href="#cases" class="cta">See the work</a>
-      <a href="#team" class="cta-outline">Meet the team stack</a>
+      <a href="#how" class="cta">See how we work</a>
+      <a href="#contact" class="cta-outline">Start a conversation</a>
     </div>
 
     <div class="stats">
       <div class="stat"><div class="n">25y</div><div class="l">Senior IT experience</div></div>
-      <div class="stat"><div class="n">4</div><div class="l">Seats in the team stack</div></div>
-      <div class="stat"><div class="n">1.16 TB</div><div class="l">SharePoint reclaimed this week</div></div>
-      <div class="stat"><div class="n">v1.9</div><div class="l">Live versions of FastForward shipped</div></div>
+      <div class="stat"><div class="n">4</div><div class="l">Seats in the delivery stack</div></div>
+      <div class="stat"><div class="n">M365</div><div class="l">First-choice stack</div></div>
+      <div class="stat"><div class="n">Daily</div><div class="l">Shipping cadence</div></div>
     </div>
   </section>
 
@@ -335,7 +403,7 @@ footer.site a:hover { color: var(--brand); }
     </p>
     <div class="manifesto">
       <p class="q">
-        "We're not a deck-and-roadmap shop. We're a senior IT lead and three AI agents shipping production software, end-to-end, into customer environments. The AI is not a feature in a product — it's how the work gets done."
+        "We're not a deck-and-roadmap shop. We're a senior IT lead and a team of AI agents shipping production software, end-to-end, into customer environments. The AI is not a feature in a product — it's how the work gets done."
       </p>
       <div class="who">— Paul McCann, ML² Consulting</div>
     </div>
@@ -350,111 +418,215 @@ footer.site a:hover { color: var(--brand); }
       <div class="card">
         <div class="icon">⌘</div>
         <h3>Fractional senior IT</h3>
-        <p>25 years of architecture, project management, and operational change across Apple support, healthcare IT, and family businesses. You get a senior IT voice in the room without a six-figure hire.</p>
+        <p>25 years of architecture, project management, and operational change. You get a senior IT voice in the room without a six-figure hire.</p>
       </div>
       <div class="card">
         <div class="icon">⚡</div>
         <h3>AI-augmented delivery</h3>
-        <p>Our AI agents become an ops layer for your project — drafting docs, running scheduled tasks, watching deploys, refreshing dashboards, talking to each other across machines. You see the live work, not a presentation about it.</p>
+        <p>Our AI agents become an ops layer for your project — drafting docs, running scheduled tasks, watching deploys, refreshing dashboards. You see the live work, not a presentation about it.</p>
       </div>
       <div class="card">
         <div class="icon">◉</div>
-        <h3>Custom software with live demos</h3>
+        <h3>Custom software, live demos</h3>
         <p>We build, you watch the URL update. Every iteration deploys to a verifiable public address — no "it's nearly ready" cycles. SHA-verified live equals local, every time.</p>
       </div>
       <div class="card">
         <div class="icon">↔</div>
         <h3>API + connector design</h3>
-        <p>Integration work for the messy middle: SAGE, Mandata, Outlook, SharePoint, Power Automate, Access migrations, Power BI. Microsoft-stack first when the customer already pays for it.</p>
+        <p>Integration work for the messy middle: SAGE, Outlook, SharePoint, Power Automate, Access migrations, Power BI. Microsoft-stack first when the customer already pays for it.</p>
       </div>
       <div class="card">
         <div class="icon">▣</div>
         <h3>Microsoft-stack integrations</h3>
-        <p>M365, SharePoint Online (16+ sites under management), Power Platform, Azure SQL, Entra app-only auth. PnP / Graph / Power Automate fluency at executor level — we run it, not just specify it.</p>
+        <p>M365, SharePoint Online, Power Platform, Azure SQL, Entra app-only auth. PnP / Graph / Power Automate fluency at executor level — we run it, not just specify it.</p>
       </div>
       <div class="card">
         <div class="icon">▢</div>
         <h3>Productisation of internal tools</h3>
-        <p>Built something good for one customer? We've shipped the same playbook twice: turning a single-customer build into a product with its own brand, demo URL, and go-to-market path.</p>
+        <p>Built something good for one customer? We've shipped the same playbook: turning a single-customer build into a product with its own brand, demo URL, and go-to-market path.</p>
       </div>
     </div>
   </section>
 
-  <section class="s" id="cases">
-    <h2><span class="num">03 · Case studies</span>Real work, live URLs</h2>
+  <section class="s" id="how">
+    <h2><span class="num">03 · How we work</span>The operating model</h2>
     <p class="intro">
-      None of the below is a mock-up or a portfolio screenshot. Each row links to a public surface you can poke at right now.
+      Most consultancies have one person, billed senior, doing every role at the speed of one person. We have one senior lead and a team of AI agents operating in defined lanes with a written protocol between them. Same hour of yours, four streams of work — visibly, on a live URL you can refresh.
+    </p>
+
+    <div class="flow">
+      <div class="stage">
+        <span class="step">1</span>
+        <h3>Discover</h3>
+        <p>30-minute call. We name the outcome, scope, and date. No theatrics — just what you need shipped this month.</p>
+        <div class="meta">YOU + PAUL</div>
+      </div>
+      <div class="stage">
+        <span class="step">2</span>
+        <h3>Architect</h3>
+        <p>One-pager covering stack, risk register, milestone gates, success criteria. Decisions go through a senior IT lens before agents touch a keyboard.</p>
+        <div class="meta">PAUL + CONTROLLER</div>
+      </div>
+      <div class="stage">
+        <span class="step">3</span>
+        <h3>Build &amp; ship</h3>
+        <p>Iterative, every iteration deployed to a live URL. SHA-verified. ACK protocol between agents. Daily 20:00 UK digest to your inbox.</p>
+        <div class="meta">AGENTS + PAUL OVERSIGHT</div>
+      </div>
+      <div class="stage">
+        <span class="step">4</span>
+        <h3>Run &amp; evolve</h3>
+        <p>AI ops layer continues post-launch — monitoring, refreshing dashboards, watching deploys, escalating on threshold. You see the work, not a status report about it.</p>
+        <div class="meta">AGENTS, ON CADENCE</div>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 32px; font-size: 18px;">Data flow — a live example</h3>
+    <p style="color: var(--ink-2); font-size: 14.5px;">
+      Every cross-seat message is a file with YAML frontmatter and an ACK window tied to priority. P0 acknowledged in 10 minutes or it escalates. Heartbeats every 30 minutes. Memory mirrors one-way, seat-owns-own. Five-minute readable protocol. The diagram below is the actual message bus our agents use:
+    </p>
+
+    <div class="flow-svg-wrap">
+      <svg viewBox="0 0 880 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Data flow between Paul, the AI agents, and the customer deliverable">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/>
+          </marker>
+          <marker id="arr-grey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="#9ca3af"/>
+          </marker>
+        </defs>
+
+        <!-- Customer column -->
+        <rect x="20" y="120" width="140" height="80" rx="12" fill="#eff6ff" stroke="#2563EB" stroke-width="1.5"/>
+        <text x="90" y="150" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#0f172a">Customer</text>
+        <text x="90" y="170" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#6b7280">Stakeholders +</text>
+        <text x="90" y="184" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#6b7280">end users</text>
+
+        <!-- Paul -->
+        <rect x="220" y="120" width="140" height="80" rx="12" fill="#0f172a"/>
+        <text x="290" y="150" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#ffffff">Paul</text>
+        <text x="290" y="170" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="rgba(255,255,255,0.7)">Senior IT lead</text>
+        <text x="290" y="184" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="rgba(255,255,255,0.7)">Authority + strategy</text>
+
+        <!-- AI Agents stack (3 boxes) -->
+        <rect x="420" y="30" width="200" height="64" rx="10" fill="#ffffff" stroke="#e5e7eb"/>
+        <text x="440" y="54" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#0f172a">Controller</text>
+        <text x="440" y="70" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#6b7280">PM · digests · dashboards · non-FF</text>
+        <text x="440" y="84" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#6b7280">nodes/controller/</text>
+
+        <rect x="420" y="128" width="200" height="64" rx="10" fill="#ffffff" stroke="#e5e7eb"/>
+        <text x="440" y="152" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#0f172a">FF-151 (deploy agent)</text>
+        <text x="440" y="168" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#6b7280">Build · ship · git discipline</text>
+        <text x="440" y="182" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#6b7280">nodes/ff-151/</text>
+
+        <rect x="420" y="226" width="200" height="64" rx="10" fill="#ffffff" stroke="#e5e7eb"/>
+        <text x="440" y="250" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#0f172a">Claude Code (executor)</text>
+        <text x="440" y="266" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#6b7280">PowerShell · PnP · Graph</text>
+        <text x="440" y="280" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#6b7280">nodes/claude-code-rtk/</text>
+
+        <!-- Bridge label -->
+        <rect x="650" y="100" width="100" height="120" rx="14" fill="#2563EB"/>
+        <text x="700" y="146" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="800" fill="white">Bridge</text>
+        <text x="700" y="164" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="rgba(255,255,255,0.85)">ACK windows</text>
+        <text x="700" y="178" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="rgba(255,255,255,0.85)">Heartbeats</text>
+        <text x="700" y="192" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="rgba(255,255,255,0.85)">Memory mirror</text>
+
+        <!-- Live URL -->
+        <rect x="790" y="120" width="80" height="80" rx="12" fill="#d1fae5" stroke="#065f46" stroke-width="1.5"/>
+        <text x="830" y="150" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="800" fill="#065f46">LIVE</text>
+        <text x="830" y="170" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#065f46">SHA-verified</text>
+        <text x="830" y="184" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#065f46">public URL</text>
+
+        <!-- Arrows: Customer → Paul -->
+        <line x1="160" y1="160" x2="218" y2="160" stroke="#2563EB" stroke-width="2" marker-end="url(#arr)"/>
+        <text x="189" y="152" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#6b7280">brief</text>
+
+        <!-- Paul → Agents (3 arrows) -->
+        <path d="M 360,135 Q 390,80 418,62" fill="none" stroke="#2563EB" stroke-width="2" marker-end="url(#arr)"/>
+        <line x1="360" y1="160" x2="418" y2="160" stroke="#2563EB" stroke-width="2" marker-end="url(#arr)"/>
+        <path d="M 360,185 Q 390,235 418,258" fill="none" stroke="#2563EB" stroke-width="2" marker-end="url(#arr)"/>
+
+        <!-- Agents → Bridge -->
+        <line x1="620" y1="62" x2="700" y2="110" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr-grey)" stroke-dasharray="3,3"/>
+        <line x1="620" y1="160" x2="650" y2="160" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr-grey)" stroke-dasharray="3,3"/>
+        <line x1="620" y1="258" x2="700" y2="218" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr-grey)" stroke-dasharray="3,3"/>
+
+        <!-- Bridge → Live -->
+        <line x1="750" y1="160" x2="788" y2="160" stroke="#065f46" stroke-width="2.5" marker-end="url(#arr)"/>
+        <text x="769" y="150" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#065f46" font-weight="700">deploy</text>
+
+        <!-- Bottom annotation -->
+        <text x="440" y="312" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#9ca3af">Every cycle: heartbeat → inbox → ack → work → outbox → heartbeat</text>
+      </svg>
+    </div>
+  </section>
+
+  <section class="s" id="cases">
+    <h2><span class="num">04 · Case studies</span>What we've shipped</h2>
+    <p class="intro">
+      ML²'s service capabilities, told through the engagements where they were proven. None of these are mock-ups — each is a live shipped system or in active production.
     </p>
 
     <div class="case">
       <div class="head">
         <div>
-          <h3>FastForward — Transport Management for JSM Glasgow <span class="pill">live · v1.9.0</span></h3>
-          <div class="meta">SaaS · React · API design · live demos at every iteration</div>
+          <h3>Transport Management SaaS <span class="pill">live</span></h3>
+          <div class="meta">Custom software · SaaS · React · API design</div>
         </div>
       </div>
       <p>
-        JSM Glasgow ran their freight-forwarding operation on Excel. We're building them a proper TMS — and productising it as an ML² product line in parallel. Nine versions shipped in seven days, all SHA-verified against the live URL.
+        Built a freight-forwarding TMS from scratch for a logistics client who'd outgrown spreadsheets. Nine iterations shipped to a verifiable live URL in a single week, each SHA-checked against the local build. Productised in parallel as an ML² product line.
       </p>
       <ul>
         <li>Customer + Subcontractor profiles with Document Store, Job History, Contacts, Previous Invoices</li>
-        <li>Admin panel: 22 connectors, 12 feature toggles, audit log, tooltip explainers</li>
-        <li>Auth gate, O365 redirect URI, header-overlap fixes — all in production</li>
-        <li>Live SHA<code> = </code>local SHA. Truth-source rule: the live URL is the only state of record</li>
+        <li>Admin panel with connector library, feature toggles, audit log, tooltip explainers</li>
+        <li>Auth, M365 OAuth integration, profile + invoicing flow</li>
+        <li>Truth-source rule: the live URL is the only state of record — every claim verified against it</li>
       </ul>
-      <div class="evidence">
-        Live: <a href="https://fastforward-v1-2-0-demo.surge.sh" target="_blank" rel="noopener">fastforward-v1-2-0-demo.surge.sh</a> · Verified 2026-05-18
-      </div>
     </div>
 
     <div class="case">
       <div class="head">
         <div>
-          <h3>R.T. Keedwell — SharePoint cleanup + automation <span class="pill">delivering</span></h3>
-          <div class="meta">PowerShell · PnP · Graph · Power Automate · 16 SharePoint sites</div>
+          <h3>SharePoint reclaim &amp; automation <span class="pill">delivering</span></h3>
+          <div class="meta">PowerShell · PnP · Graph · Power Automate · M365</div>
         </div>
       </div>
       <p>
-        Reclaimed 1.16 TB of misfiled / orphaned SharePoint data in 72 hours by combining server-side search APIs, NAS-backed provenance verification, and one-click PowerShell orchestrators.
-        Built on app-only certificate auth so future runs are zero-touch.
+        Reclaimed over a terabyte of misfiled / orphaned SharePoint data across a 16-site tenant in 72 hours by combining server-side search APIs, NAS-backed provenance verification, and one-click PowerShell orchestrators. Built on app-only certificate auth so subsequent runs are zero-touch.
       </p>
       <ul>
-        <li>Glowsoft archive purge: 984 GB recovered in a single folder-level recycle + targeted bin purge (406 archived volume folders, 0 failures)</li>
-        <li>PayData + SageBackups: 173 GB further</li>
-        <li>Sage testing + ZTemp follow-ons (~250 GB) in flight at time of writing</li>
-        <li>Designed app-only cert auth for PnP-RTK-Tools Entra app — every future PnP/Graph script runs unattended</li>
+        <li>Folder-level recycle + targeted bin purge — hundreds of archived volume folders processed, zero failures</li>
+        <li>App-only cert authentication for unattended PnP / Graph operations</li>
+        <li>Server-side search for fast inventory at scale (avoids list-view-threshold dead ends)</li>
+        <li>Access database → M365 migration scoped and queued</li>
       </ul>
-      <div class="evidence">
-        Tenant: jaystransportcouk.sharepoint.com · 16 sites under management · Power Automate flows pending Access→M365 migration
-      </div>
     </div>
 
     <div class="case">
       <div class="head">
         <div>
-          <h3>ClaudeBridge — Multi-machine agent protocol <span class="pill brand">infrastructure</span></h3>
+          <h3>ClaudeBridge — Multi-agent operating protocol <span class="pill brand">infrastructure</span></h3>
           <div class="meta">File-bus on Google Drive · per-seat inbox/outbox · ACK windows · heartbeat cadence</div>
         </div>
       </div>
       <p>
-        The operating model itself, productised. ClaudeBridge is the protocol that lets multiple Claude agents on different machines coordinate on a single portfolio: per-seat inboxes, ACK windows tied to priority (P0=10min through P3=none), heartbeat-based liveness, and a verification handshake.
+        ML²'s own operating-model infrastructure, productised. ClaudeBridge is the protocol that lets multiple AI agents on different machines coordinate on a single portfolio: per-seat inboxes, priority-tiered ACK windows (P0=10min through P3=none), heartbeat liveness, and a verification handshake. It's the difference between agents-as-chatbots and agents-as-operations-layer.
       </p>
       <ul>
-        <li>v3 layout: per-seat <code>nodes/&lt;seat&gt;/{inbox,outbox,status,memory}/</code> on Google Drive</li>
-        <li>5 seats (Controller / Claude Code RTK / FastForward .151 / PPC / Paul) operating across 2 physical machines</li>
+        <li>v3 layout: per-seat <code>nodes/&lt;seat&gt;/{inbox,outbox,status,memory}/</code></li>
         <li>Truth-source rule: every "deployed" claim verified against the live public URL</li>
         <li>Bidirectional verification handshake; mirrored memory; cron-fallback heartbeats</li>
+        <li>Available as a reference architecture for clients running their own multi-agent deployments</li>
       </ul>
-      <div class="evidence">
-        Internal infrastructure · Available as a reference architecture for clients running multi-team AI deployments
-      </div>
     </div>
   </section>
 
   <section class="s" id="team">
-    <h2><span class="num">04 · Team stack</span>Who actually does the work</h2>
+    <h2><span class="num">05 · The team</span>Who actually does the work</h2>
     <p class="intro">
-      Most consultancies have one person, billed at a senior rate, doing everyone's job at the speed of one person. We have one senior person and three AI agents operating in defined lanes with a protocol between them. Same hour of yours, four streams of work.
+      A senior IT lead, the AI delivery stack he operates, and the client stakeholders who join the room. No "consultants you'll never meet" — the named team here is the team you get.
     </p>
 
     <table class="team">
@@ -462,7 +634,6 @@ footer.site a:hover { color: var(--brand); }
         <tr>
           <th>Seat</th>
           <th>Lane</th>
-          <th>Source of truth</th>
         </tr>
       </thead>
       <tbody>
@@ -471,68 +642,54 @@ footer.site a:hover { color: var(--brand); }
             <strong>Paul McCann</strong>
             <div class="role">Senior IT lead · ML² owner</div>
           </td>
-          <td>Strategy · customer-facing · final authority · architecture and trade-off decisions</td>
-          <td>In-room conversation</td>
+          <td>Strategy, architecture, final authority. The senior judgement on every trade-off.</td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Client stakeholders</strong>
+            <div class="role">You and your team</div>
+          </td>
+          <td>Joined to the delivery loop directly. You see what we see — the live URL, the bridge messages, the daily digest.</td>
         </tr>
         <tr>
           <td>
             <strong>Controller</strong>
-            <div class="role">Cowork agent on Paul's laptop</div>
+            <div class="role">AI agent — PM &amp; coordination</div>
           </td>
-          <td>PM · portfolio coordination · daily digests · this site · dashboards · non-FF execution</td>
-          <td>nodes/controller/ on the bridge</td>
+          <td>Portfolio coordination, daily digests, dashboards, customer-facing deliverables, non-build execution.</td>
         </tr>
         <tr>
           <td>
-            <strong>FF-151</strong>
-            <div class="role">Cowork agent on JSM Glasgow .151 laptop</div>
+            <strong>Deploy agent</strong>
+            <div class="role">AI agent — build &amp; ship</div>
           </td>
-          <td>FastForward only · live deploys · git discipline · GUI iteration · clean-GUI gate</td>
-          <td>nodes/ff-151/ on the bridge</td>
+          <td>Source control, live deploys, git discipline, GUI iteration, SHA verification.</td>
         </tr>
         <tr>
           <td>
-            <strong>Claude Code (RTK)</strong>
-            <div class="role">Terminal agent on Paul's RTK box</div>
+            <strong>Executor agent</strong>
+            <div class="role">AI agent — infrastructure</div>
           </td>
-          <td>PowerShell executor · SharePoint cleanup · PnP / Graph runs · app-only auth</td>
-          <td>nodes/claude-code-rtk/ on the bridge</td>
+          <td>PowerShell, PnP, Graph, infrastructure runs, app-only auth, scheduled cleanup.</td>
         </tr>
       </tbody>
     </table>
-
-    <h3 style="margin-top: 32px;">The bridge protocol — visible, not magic</h3>
-    <p style="color: var(--ink-2); font-size: 14.5px;">
-      Every cross-seat message is a file with YAML frontmatter and an ACK window tied to priority. P0 ACK in 10 minutes or it escalates. P3 needs no ACK. Heartbeats every 30 minutes. Memory mirrors one-way, seat-owns-own. The whole protocol is one document — readable in 5 minutes — and is the difference between agents-as-chatbots and agents-as-operations-layer.
-    </p>
-    <div class="bridge-diagram">
-ClaudeBridge v3 — message flow
-
-  controller    ----→    nodes/ff-151/inbox/    [outbox copy retained for audit]
-        ↑                       │
-        │                       ↓
-        └───── acks.log ←── ff-151 (within ack_window_mins)
-        └───── heartbeat.json (each cycle, P0=10m / P1=60m / P2=240m / P3=none)
-
-  Verification handshake = beacon round-trip per seat.
-  Truth-source rule = every "deployed" verified against live public URL.
-    </div>
   </section>
 
   <section class="s" id="contact">
-    <h2><span class="num">05 · Contact</span>Start a conversation</h2>
+    <h2><span class="num">06 · Contact</span>Start a conversation</h2>
     <p class="intro">
       The fastest way to find out whether ML² fits is a 30-minute call. Bring a problem you'd like shipped this month.
     </p>
     <div class="contact-card">
-      <h2 style="margin-bottom: 6px;">Paul McCann</h2>
+      <h2>Paul McCann</h2>
       <p>ML² Consulting · Senior IT + AI-multiplied delivery</p>
       <div class="channels">
-        <a class="email" href="mailto:Paul.mccann@rtkeedwellgroup.co.uk">Paul.mccann@rtkeedwellgroup.co.uk</a>
+        <a class="email" href="mailto:Paul.mccann@rtkeedwellgroup.co.uk">Email Paul</a>
         <a class="phone" href="tel:+447920050366">+44 7920 050366</a>
       </div>
-      <div style="margin-top: 14px;">
-        <a class="secondary" href="#cases">See the work first →</a>
+      <div>
+        <a class="secondary" href="#how">See how we work first →</a>
       </div>
     </div>
   </section>
@@ -541,17 +698,36 @@ ClaudeBridge v3 — message flow
 
 <footer class="site">
   <div class="inner">
-    <div>ML² Consulting Ltd · Senior IT + AI delivery team</div>
+    <div>© <span id="year">2026</span> ML² Consulting Ltd · Senior IT + AI delivery team</div>
     <div>
-      Built and shipped by the Controller agent · <span id="built-at">2026-05-18</span> ·
-      <a href="https://github.com/Gonzo8285/ml2-consulting" target="_blank" rel="noopener">source</a>
+      <a href="privacy.html">Privacy</a> ·
+      <a href="mailto:Paul.mccann@rtkeedwellgroup.co.uk">Contact</a>
     </div>
   </div>
 </footer>
 
+<!-- Cookie notice (only essential cookies used) -->
+<div class="cookie-note" id="cookieNote" style="display:none;" role="region" aria-label="Cookie notice">
+  <span>This site doesn't use tracking cookies. Just a "you've seen this" flag in your browser. <a href="privacy.html">Privacy</a>.</span>
+  <button type="button" id="cookieOK">OK</button>
+</div>
+
 <script>
-// Show today's date in the footer instead of hardcoded
-document.getElementById('built-at').textContent = new Date().toISOString().slice(0, 10);
+// Footer year
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Cookie notice — first-visit only
+(function() {
+  try {
+    if (!localStorage.getItem('ml2_seen_notice')) {
+      document.getElementById('cookieNote').style.display = 'flex';
+    }
+    document.getElementById('cookieOK').addEventListener('click', function() {
+      localStorage.setItem('ml2_seen_notice', '1');
+      document.getElementById('cookieNote').style.display = 'none';
+    });
+  } catch(e) { /* localStorage blocked — show notice harmlessly */ }
+})();
 </script>
 
 </body>
